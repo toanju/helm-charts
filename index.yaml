@@ -1,0 +1,18 @@
+apiVersion: v1
+entries:
+  dummy:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-10-15T12:52:56.94342918Z"
+    description: A Helm chart for Kubernetes
+    digest: e8120b15f16d65a5390c86e9c8f56f0d6ad6c614eb27af3fc05015f2a988650b
+    maintainers:
+    - email: toanju@users.noreply.github.com
+      name: toanju
+      url: https://github.com/toanju/
+    name: dummy
+    type: application
+    urls:
+    - https://github.com/toanju/helm-charts/releases/download/dummy-0.1.2/dummy-0.1.2.tgz
+    version: 0.1.2
+generated: "2022-10-15T12:52:56.94343518Z"
