@@ -1,6 +1,10 @@
 apiVersion: v2
 name: dummy
 description: A Helm chart for Kubernetes
+maintainers:
+  - name: toanju  # Tobias Jungel
+    email: toanju@users.noreply.github.com
+    url: https://github.com/toanju/
 
 # A chart can be either an 'application' or a 'library' chart.
 #
