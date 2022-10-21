@@ -1,0 +1,7 @@
+remote: origin
+target-branch: main
+excluded-charts:
+  - zigbee2mqtt
+chart-dirs:
+  - charts
+helm-extra-args: --timeout 600s
