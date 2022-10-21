@@ -29,4 +29,22 @@ entries:
     urls:
     - https://github.com/toanju/helm-charts/releases/download/dummy-0.1.2/dummy-0.1.2.tgz
     version: 0.1.2
-generated: "2022-10-15T13:17:22.384037116Z"
+  zigbee2mqtt:
+  - apiVersion: v2
+    appVersion: 1.28.0
+    created: "2022-10-21T20:39:16.59322517Z"
+    description: A Helm chart for Kubernetes
+    digest: 94e4f28ad4320481eed173d0ece1436e617704d5e08e3008c6e9aae808b50a2e
+    home: https://github.com/toanju/helm-charts/
+    maintainers:
+    - email: toanju@users.noreply.github.com
+      name: toanju
+      url: https://github.com/toanju/
+    name: zigbee2mqtt
+    sources:
+    - https://github.com/Koenkk/zigbee2mqtt
+    type: application
+    urls:
+    - https://github.com/toanju/helm-charts/releases/download/zigbee2mqtt-0.1.0/zigbee2mqtt-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-10-21T20:39:16.593234571Z"
