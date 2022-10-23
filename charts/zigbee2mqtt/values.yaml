@@ -85,3 +85,5 @@ zigbee2mqtt:
       host: 0.0.0.0
     advanced:
       log_level: debug
+  # Additional environment variables
+  env: []
