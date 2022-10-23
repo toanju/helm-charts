@@ -70,6 +70,7 @@ spec:
             - mountPath: /app/data
               name: data-volume
             - mountPath: {{ .Values.zigbee2mqtt.config.serial.port | default "/dev/ttyUSB0" }}
+              name: serial-device
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
