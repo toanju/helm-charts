@@ -73,6 +73,8 @@ tolerations: []
 affinity: {}
 
 zigbee2mqtt:
+  # zigbee2mqtt configuration file
+  # For details see https://www.zigbee2mqtt.io/guide/configuration/
   config:
     # Minimal configuration.yml example
     mqtt:
@@ -85,5 +87,7 @@ zigbee2mqtt:
       host: 0.0.0.0
     advanced:
       log_level: debug
+  # serial device mapped to the pod
+  hostSerialDevice: "/dev/ttyUSB0"
   # Additional environment variables
   env: []
