@@ -1,11 +1,11 @@
-# Default values for dummy.
+# Default values for mosquitto.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: eclipse-mosquitto
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -38,7 +38,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80
+  port: 1883
 
 ingress:
   enabled: false
@@ -80,3 +80,20 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+mosquitto:
+  config: |
+    # config for testing
+    per_listener_settings true
+    # MQTT, anon
+    listener 1883
+    socket_domain ipv4
+    allow_anonymous true
+    set_tcp_nodelay true
+    # Websockets, anon
+    listener 8080
+    socket_domain ipv4
+    protocol websockets
+    http_dir /mosquitto/config
+    allow_anonymous true
+    set_tcp_nodelay true
