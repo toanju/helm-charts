@@ -5,5 +5,5 @@ metadata:
   labels:
     {{- include "mosquitto.labels" . | nindent 4 }}
 data:
-  mosquitto.conf: |-
+  mosquitto.conf: |
 {{ .Values.mosquitto.config | indent 4 }}
