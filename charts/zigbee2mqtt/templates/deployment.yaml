@@ -93,7 +93,8 @@ spec:
             name: {{ include "zigbee2mqtt.fullname" . }}-configmap
         - name: data-volume
           {{- if .Values.persistence.enabled }}
-          claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{ else }}{{ include "zigbee2mqtt.fullname" . }}-pvc{{ end }}
+          persistentVolumeClaim:
+            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ include "zigbee2mqtt.fullname" . }}-pvc{{- end }}
           {{- else }}
           emptyDir: {}
           {{- end }}
