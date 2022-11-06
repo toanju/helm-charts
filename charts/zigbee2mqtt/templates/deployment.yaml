@@ -31,7 +31,11 @@ spec:
           args:
             - >-
               set -e;
-              cp /config/configuration.yaml /data/
+              if [ -f /data/configuration.yaml ]; then
+                echo "Config exists. Skipping";
+              else
+                cp /config/configuration.yaml /data/;
+              fi;
           command: [ 'sh', '-c' ]
           imagePullPolicy: Always
           volumeMounts:
@@ -88,7 +92,11 @@ spec:
           configMap:
             name: {{ include "zigbee2mqtt.fullname" . }}-configmap
         - name: data-volume
+          {{- if .Values.persistence.enabled }}
+          claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{ else }}{{ include "zigbee2mqtt.fullname" . }}-pvc{{ end }}
+          {{- else }}
           emptyDir: {}
+          {{- end }}
         - name: serial-device
           hostPath:
             path: {{ .Values.zigbee2mqtt.hostSerialDevice | default "/dev/ttyUSB0" }}
