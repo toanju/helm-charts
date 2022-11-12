@@ -73,6 +73,9 @@ tolerations: []
 
 affinity: {}
 
+# Set to true to enable services like UPnP/SSDP
+hostNetwork: false
+
 persistence:
   # persistence.enabled If true, use a Persistent Volume Claim. If false, use emptyDir.
   enabled: false
