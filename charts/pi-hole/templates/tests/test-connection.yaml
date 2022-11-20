@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "pi-hole.fullname" . }}-test-connection"
+  labels:
+    {{- include "pi-hole.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "pi-hole.fullname" . }}:{{ .Values.service.ports.http }}/admin/login.php']
+  restartPolicy: Never

@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "pi-hole.fullname" . }}
+  labels:
+    {{- include "pi-hole.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "pi-hole.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "pi-hole.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "pi-hole.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: create-configs
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          command: [ 'bash', '-c', '/usr/local/bin/_startup.sh ']
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: {{ include "pi-hole.fullname" . }}-configmap
+          {{- if .Values.pihole.existingWebPasswordSecretName }}
+          env:
+            - name: WEBPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.pihole.existingWebPasswordSecretName }}
+                  key: WEBPASSWORD
+          {{- end }}
+          volumeMounts:
+            - mountPath: /etc/pihole
+              subPath: pihole
+              name: data-volume
+            - mountPath: /etc/dnsmasq.d
+              subPath: dnsmasq.d
+              name: data-volume
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.ports.http }}
+              protocol: TCP
+            - name: dnstcp
+              containerPort: {{ .Values.service.ports.dnstcp }}
+              protocol: TCP
+            - name: dnsudp
+              containerPort: {{ .Values.service.ports.dnsudp }}
+              protocol: UDP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: TZ
+              value: {{ .Values.pihole.env.TZ }}
+          volumeMounts:
+            - mountPath: /etc/pihole
+              subPath: pihole
+              name: data-volume
+            - mountPath: /etc/dnsmasq.d
+              subPath: dnsmasq.d
+              name: data-volume
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: data-volume
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ include "pi-hole.fullname" . }}-pvc{{- end }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
