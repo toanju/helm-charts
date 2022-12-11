@@ -25,6 +25,14 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
+        {{- if .Values.containerizedKubelet }}
+        - name: prepare-subpath
+          image: busybox
+          command: ["mkdir", "/vol/pihole", "/vol/dnsmasq.d"]
+          volumeMounts:
+            - mountPath: /vol
+              name: data-volume
+        {{- end }}
         - name: create-configs
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           command: [ 'bash', '-c', '/usr/local/bin/_startup.sh ']
