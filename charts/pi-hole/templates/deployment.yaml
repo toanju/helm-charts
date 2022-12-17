@@ -72,6 +72,10 @@ spec:
           env:
             - name: TZ
               value: {{ .Values.pihole.env.TZ }}
+            - name: FTL_CMD
+              value: {{ .Values.pihole.env.FTL_CMD }}
+            - name: FTLCONF_LOCAL_IPV4
+              value: {{ .Values.pihole.env.FTLCONF_LOCAL_IPV4 }}
           volumeMounts:
             - mountPath: /etc/pihole
               subPath: pihole
