@@ -115,8 +115,6 @@ persistence:
   # Persistent Volume Name
   volumeName: ""
 
-containerizedKubelet: true
-
 pihole:
   env:
     TZ: UTC
