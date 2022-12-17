@@ -118,5 +118,7 @@ persistence:
 pihole:
   env:
     TZ: UTC
+    FTL_CMD: no-daemon
+    FTLCONF_LOCAL_IPV4: 0.0.0.0
   extraEnv: {}
   existingWebPasswordSecretName: ""
