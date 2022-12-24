@@ -19,6 +19,7 @@ spec:
         {{- include "home-assistant.selectorLabels" . | nindent 8 }}
     spec:
       hostNetwork: {{ .Values.hostNetwork }}
+      dnsPolicy: {{ .Values.dnsPolicy }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
