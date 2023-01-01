@@ -9,6 +9,10 @@ spec:
   selector:
     matchLabels:
       {{- include "zigbee2mqtt.selectorLabels" . | nindent 6 }}
+  {{- with .Values.strategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -49,9 +53,9 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if .Values.zigbee2mqtt.env }}
+          {{- with .Values.zigbee2mqtt.env }}
           env:
-{{ toYaml .Values.zigbee2mqtt.env | indent 12}}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
           # frontend expected to be running
           {{- if .Values.zigbee2mqtt.config.frontend }}

@@ -112,6 +112,11 @@ persistence:
   # Persistent Volume Name
   volumeName: ""
 
+strategy: {}
+  # Deployment strategy
+  # e.g.
+  # type: Recreate
+
 zigbee2mqtt:
   # zigbee2mqtt configuration file
   # For details see https://www.zigbee2mqtt.io/guide/configuration/
