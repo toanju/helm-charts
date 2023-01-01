@@ -67,3 +67,4 @@ spec:
         - name: wg-config
           secret:
             secretName: "{{ .Values.wireguard.secret.name }}"
+            defaultMode: 0600
