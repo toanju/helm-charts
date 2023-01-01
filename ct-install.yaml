@@ -1,6 +1,7 @@
 remote: origin
 target-branch: main
 excluded-charts:
+  - wireguard
   - zigbee2mqtt
 chart-dirs:
   - charts
