@@ -31,6 +31,23 @@ entries:
     version: 0.1.2
   home-assistant:
   - apiVersion: v2
+    appVersion: 2022.12.8
+    created: "2023-01-01T12:06:39.831528854Z"
+    description: A Helm chart for Kubernetes
+    digest: cc0ba79545e1160d284cbf8e4a284b2622f567c7db585526774eaf3b465ff3b3
+    home: https://github.com/toanju/helm-charts/
+    maintainers:
+    - email: toanju@users.noreply.github.com
+      name: toanju
+      url: https://github.com/toanju/
+    name: home-assistant
+    sources:
+    - https://github.com/home-assistant/core
+    type: application
+    urls:
+    - https://github.com/toanju/helm-charts/releases/download/home-assistant-0.3.0/home-assistant-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
     appVersion: 2022.11.4
     created: "2022-12-24T09:18:04.012119853Z"
     description: A Helm chart for Kubernetes
@@ -378,4 +395,4 @@ entries:
     urls:
     - https://github.com/toanju/helm-charts/releases/download/zigbee2mqtt-0.1.0/zigbee2mqtt-0.1.0.tgz
     version: 0.1.0
-generated: "2022-12-24T09:18:04.01253906Z"
+generated: "2023-01-01T12:06:39.831719661Z"
