@@ -9,6 +9,10 @@ spec:
   selector:
     matchLabels:
       {{- include "home-assistant.selectorLabels" . | nindent 6 }}
+  {{- with .Values.strategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -33,9 +37,9 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if .Values.ha.env }}
+          {{- with .Values.ha.env }}
           env:
-{{ toYaml .Values.ha.env | indent 12}}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
           ports:
             - name: http

@@ -117,5 +117,10 @@ persistence:
   # Persistent Volume Name
   volumeName: ""
 
+strategy: {}
+  # Deployment strategy
+  # e.g.
+  # type: Recreate
+
 ha:
   env: []
