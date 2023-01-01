@@ -37,7 +37,6 @@ spec:
           env:
 {{ toYaml .Values.ha.env | indent 12}}
           {{- end }}
-          # frontend expected to be running
           ports:
             - name: http
               containerPort: 8123
