@@ -276,6 +276,22 @@ entries:
     urls:
     - https://github.com/toanju/helm-charts/releases/download/pi-hole-0.1.0/pi-hole-0.1.0.tgz
     version: 0.1.0
+  wireguard:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2023-01-01T12:14:13.53912066Z"
+    description: A Helm chart for Kubernetes
+    digest: 9a05fb163ad513ab7b3daf23e37c510dc3d18bd60fffce82ba0814a0bb37c12a
+    home: https://github.com/toanju/helm-charts/
+    maintainers:
+    - email: toanju@users.noreply.github.com
+      name: toanju
+      url: https://github.com/toanju/
+    name: wireguard
+    type: application
+    urls:
+    - https://github.com/toanju/helm-charts/releases/download/wireguard-0.1.0/wireguard-0.1.0.tgz
+    version: 0.1.0
   zigbee2mqtt:
   - apiVersion: v2
     appVersion: 1.29.0
@@ -430,4 +446,4 @@ entries:
     urls:
     - https://github.com/toanju/helm-charts/releases/download/zigbee2mqtt-0.1.0/zigbee2mqtt-0.1.0.tgz
     version: 0.1.0
-generated: "2023-01-01T12:08:45.106273008Z"
+generated: "2023-01-01T12:14:13.539170062Z"
