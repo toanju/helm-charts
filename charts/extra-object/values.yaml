@@ -1,0 +1,7 @@
+# use the following syntax to make use of this
+#
+# object: |
+#   key: value
+#   namespace: {{ .Release.namespace }}
+#
+object: ""
