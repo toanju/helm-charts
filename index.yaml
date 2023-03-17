@@ -29,6 +29,22 @@ entries:
     urls:
     - https://github.com/toanju/helm-charts/releases/download/dummy-0.1.2/dummy-0.1.2.tgz
     version: 0.1.2
+  extraObject:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2023-03-17T10:04:45.334616721Z"
+    description: A Helm chart for Kubernetes
+    digest: 6b7530e9efca06fb48fbbc831861a7e54536e82b42678dbbbe3f52106a0a8c29
+    home: https://github.com/toanju/helm-charts/
+    maintainers:
+    - email: toanju@users.noreply.github.com
+      name: toanju
+      url: https://github.com/toanju/
+    name: extraObject
+    type: application
+    urls:
+    - https://github.com/toanju/helm-charts/releases/download/extraObject-0.1.0/extraObject-0.1.0.tgz
+    version: 0.1.0
   home-assistant:
   - apiVersion: v2
     appVersion: 2023.2.3
@@ -667,4 +683,4 @@ entries:
     urls:
     - https://github.com/toanju/helm-charts/releases/download/zigbee2mqtt-0.1.0/zigbee2mqtt-0.1.0.tgz
     version: 0.1.0
-generated: "2023-02-11T20:03:08.586337037Z"
+generated: "2023-03-17T10:04:45.334681822Z"
