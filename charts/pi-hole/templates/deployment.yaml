@@ -65,7 +65,7 @@ spec:
               protocol: UDP
           livenessProbe:
             httpGet:
-              path: /
+              path: /admin/
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
