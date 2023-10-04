@@ -39,6 +39,11 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 1883
+  # see https://kubernetes.io/docs/concepts/services-networking/dual-stack/
+  ipFamilyPolicy: "SingleStack"
+  # see https://kubernetes.io/docs/concepts/services-networking/dual-stack/
+  ipFamilies:
+  - IPv4
   annotations: {}
 
 ingress:
