@@ -3,13 +3,46 @@
   "customManagers": [
     {
       "customType": "regex",
-      "description": "Update home-assistant docker image references",
+      "description": "Update home-assistant container image references",
       "fileMatch": ["^charts\\/home-assistant\\/Chart\\.yaml$"],
       "matchStrings": [
         "appVersion: \"(?<currentValue>.*?)\"\\s+",
         "version: (?<currentValue>.*?)\\s+"
       ],
       "depNameTemplate": "ghcr.io/home-assistant/home-assistant",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "Update mosquitto container image references",
+      "fileMatch": ["^charts\\/mosquitto\\/Chart\\.yaml$"],
+      "matchStrings": [
+        "appVersion: \"(?<currentValue>.*?)\"\\s+",
+        "version: (?<currentValue>.*?)\\s+"
+      ],
+      "depNameTemplate": "eclipse-mosquitto",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "Update pi-hole container image references",
+      "fileMatch": ["^charts\\/pi-hole\\/Chart\\.yaml$"],
+      "matchStrings": [
+        "appVersion: \"(?<currentValue>.*?)\"\\s+",
+        "version: (?<currentValue>.*?)\\s+"
+      ],
+      "depNameTemplate": "pihole/pihole",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "Update zigbee2mqtt container image references",
+      "fileMatch": ["^charts\\/zigbee2mqtt\\/Chart\\.yaml$"],
+      "matchStrings": [
+        "appVersion: \"(?<currentValue>.*?)\"\\s+",
+        "version: (?<currentValue>.*?)\\s+"
+      ],
+      "depNameTemplate": "ghcr.io/koenkk/zigbee2mqtt",
       "datasourceTemplate": "docker"
     }
   ]
