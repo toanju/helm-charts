@@ -251,6 +251,23 @@ entries:
     version: 0.1.0
   mosquitto:
   - apiVersion: v2
+    appVersion: 2.0.18
+    created: "2023-10-14T12:21:28.710552108Z"
+    description: A Helm chart for Kubernetes
+    digest: 3e6bcb7806ad6698d4d2605f578a963be47d31e583563d6f331d500ef470e80c
+    home: https://github.com/toanju/helm-charts/
+    maintainers:
+    - email: toanju@users.noreply.github.com
+      name: toanju
+      url: https://github.com/toanju/
+    name: mosquitto
+    sources:
+    - https://github.com/eclipse/mosquitto
+    type: application
+    urls:
+    - https://github.com/toanju/helm-charts/releases/download/mosquitto-2.0.18/mosquitto-2.0.18.tgz
+    version: 2.0.18
+  - apiVersion: v2
     appVersion: 2.0.15
     created: "2023-10-04T18:46:52.098931545Z"
     description: A Helm chart for Kubernetes
@@ -838,4 +855,4 @@ entries:
     urls:
     - https://github.com/toanju/helm-charts/releases/download/zigbee2mqtt-0.1.0/zigbee2mqtt-0.1.0.tgz
     version: 0.1.0
-generated: "2023-10-14T12:10:23.919122344Z"
+generated: "2023-10-14T12:21:28.710707813Z"
