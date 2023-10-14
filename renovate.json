@@ -3,11 +3,11 @@
   "customManagers": [
     {
       "customType": "regex",
-      "description": "Update renovate docker image references",
+      "description": "Update home-assistant docker image references",
       "fileMatch": ["^charts\\/home-assistant\\/Chart\\.yaml$"],
       "matchStrings": [
-        "appVersion: '(?<currentValue>.*?)'\\s+",
-        "version: '(?<currentValue>.*?)'\\s+"
+        "appVersion: \"(?<currentValue>.*?)\"\\s+",
+        "version: (?<currentValue>.*?)\\s+"
       ],
       "depNameTemplate": "ghcr.io/home-assistant/home-assistant",
       "datasourceTemplate": "docker"
