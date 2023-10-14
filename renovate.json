@@ -31,7 +31,7 @@
         "appVersion: \"(?<currentValue>.*?)\"\\s+",
         "version: (?<currentValue>.*?)\\s+"
       ],
-      "depNameTemplate": "pihole/pihole",
+      "depNameTemplate": "ghcr.io/pi-hole/pihole",
       "datasourceTemplate": "docker"
     },
     {
