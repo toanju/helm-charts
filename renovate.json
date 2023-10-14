@@ -11,5 +11,6 @@
       ],
       "depNameTemplate": "ghcr.io/home-assistant/home-assistant",
       "datasourceTemplate": "docker"
-   }
+    }
+  ]
 }
