@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 image:
-  repository: koenkk/zigbee2mqtt
+  repository: ghcr.io/koenkk/zigbee2mqtt
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
