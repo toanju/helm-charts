@@ -1,5 +1,6 @@
 chart-dirs:
   - charts
+check-version-increment: False
 helm-extra-args: --timeout 600s
 remote: origin
 target-branch: main
