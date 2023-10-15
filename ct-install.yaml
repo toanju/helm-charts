@@ -1,8 +1,9 @@
-remote: origin
-target-branch: main
-excluded-charts:
-  - wireguard
-  - zigbee2mqtt
 chart-dirs:
   - charts
+excluded-charts:
+  - home-assistant
+  - wireguard
+  - zigbee2mqtt
 helm-extra-args: --timeout 600s
+remote: origin
+target-branch: main
