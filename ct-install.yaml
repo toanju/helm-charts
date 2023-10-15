@@ -1,5 +1,6 @@
 chart-dirs:
   - charts
+check-version-increment: False
 excluded-charts:
   - wireguard
   - zigbee2mqtt
