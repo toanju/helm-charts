@@ -29,4 +29,4 @@ version: 2023.10.3-1
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 # https://github.com/home-assistant/core/releases
-appVersion: "2023.10.3"
+appVersion: "2023.10.4"
