@@ -1,0 +1,76 @@
+{{ template "chart.header" . }}
+{{ template "chart.deprecationWarning" . }}
+
+{{ template "chart.versionBadge" . }}{{ template "chart.typeBadge" . }}{{ template "chart.appVersionBadge" . }}
+
+{{ template "chart.description" . }}
+
+{{ template "chart.homepageLine" . }}
+
+## Installation
+
+### Add Helm repository
+
+```shell
+helm repo add renovate https://docs.renovatebot.com/helm-charts
+helm repo update
+```
+
+## Install Renovate chart
+
+Using config from a file:
+
+```bash
+helm install --generate-name --set-file renovate.config=config.json5 renovate/renovate
+```
+
+Using config from a string:
+
+```bash
+helm install --generate-name --set renovate.config='\{\"token\":\"...\"\}' renovate/renovate
+```
+
+**NOTE**: `renovate.config` must be a valid Renovate [self-hosted configuration](https://docs.renovatebot.com/self-hosted-configuration/)
+
+## Configuration
+
+The following table lists the configurable parameters of the chart and the default values.
+
+{{ template "chart.valuesSection" . }}
+
+## Renovate persistent cache
+
+To speed up execution time of jobs it could be useful to enable persistent caching. This means that Renovate
+can make use of the cache that have been build up in previous runs. Set `renovate.persistence.cache.enabled` to true
+to enable this. If necessary, the storageClass can be configured and the storageSize can be set to the preferred value.
+
+**NOTE**: `securityContext.fsGroup` must be set to the correct group ID to use the persistent cache. Without it, renovate
+can't write to the mounted PVC. For the current default user (`ubuntu`), the correct fsGroup is `1000`.
+
+## Renovate config templating
+
+Enable `renovate.configEnableHelmTpl` to use helm templates for generated renovate `config.json5`.
+Allows you to reference values using `"{{ .Values.someValue }}"` in your config
+
+**NOTE**: setting `renovate.configEnableHelmTpl` to true means that you have to
+escape your config entries containing `{{` (i.e. `"key": "{{depName}}"`) in the
+value by wrapping it like: `"key": "{{ "{{depName}}" }}"`.
+
+## Renovate full image
+
+This chart is using the slim renovate image by default.
+If you want to use the full renovate image, set the `image.tag` to `full`.
+If you like to use a specific major version, set the `image.tag` to `36-full`.
+
+## Redis
+
+Please checkout [bitnami redis](https://artifacthub.io/packages/helm/bitnami/redis) chart for additional redis configuration.
+
+## Upgrading
+
+A major chart version change can indicate that there is an incompatible breaking change needing maual actions.
+
+### To v16
+
+- The `slim` options was removed, the `latest` tag now points to the slim renovate docker image.
+- The `dind` option was removed. The `slim` renovate version uses `binarySource=install`, so no need for complex Docker in Docker setup.
