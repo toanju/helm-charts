@@ -810,6 +810,50 @@ entries:
     urls:
     - https://github.com/toanju/helm-charts/releases/download/pi-hole-0.1.0/pi-hole-0.1.0.tgz
     version: 0.1.0
+  renovate:
+  - annotations:
+      artifacthub.io/images: |
+        - name: ghcr.io/renovatebot/renovate:37.100.0
+          image: ghcr.io/renovatebot/renovate:37.100.0
+          platforms:
+            - linux/amd64
+            - linux/arm64
+      artifacthub.io/license: AGPL-3.0-only
+      artifacthub.io/links: |
+        - name: docs
+          url: https://docs.renovatebot.com
+    apiVersion: v2
+    appVersion: 37.100.0
+    created: "2023-12-16T10:22:46.388347378Z"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 18.5.0
+    description: Universal dependency update tool that fits into your workflows.
+    digest: f2d569faa0f698162aef90dde6181a723438fbaeb2e27572c380035e146a3c9f
+    home: https://github.com/renovatebot/renovate
+    icon: https://docs.renovatebot.com/assets/images/logo.png
+    keywords:
+    - automated
+    - dependencies
+    - dependency
+    - management
+    - update
+    maintainers:
+    - email: jamie.magee@gmail.com
+      name: JamieMagee
+    - email: michael.kriese@visualon.de
+      name: viceice
+    - email: rhys@arkins.net
+      name: rarkins
+    name: renovate
+    sources:
+    - https://github.com/renovatebot/renovate
+    - https://github.com/renovatebot/helm-charts
+    urls:
+    - https://github.com/toanju/helm-charts/releases/download/renovate-37.100.0/renovate-37.100.0.tgz
+    version: 37.100.0
   wireguard:
   - apiVersion: v2
     appVersion: 0.2.0
@@ -1182,4 +1226,4 @@ entries:
     urls:
     - https://github.com/toanju/helm-charts/releases/download/zigbee2mqtt-0.1.0/zigbee2mqtt-0.1.0.tgz
     version: 0.1.0
-generated: "2023-12-16T09:55:23.056961173Z"
+generated: "2023-12-16T10:22:46.388527192Z"
