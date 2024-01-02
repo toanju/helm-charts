@@ -1,1 +1,0 @@
-A {{ template "renovate.name" . }} CronJob will run with schedule {{ .Values.cronjob.schedule }}.
