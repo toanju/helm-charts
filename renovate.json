@@ -1,8 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-     ":automergeMinor",
-     "config:recommended"
+     "github>toanju/renovate-config"
   ],
   "customManagers": [
     {
