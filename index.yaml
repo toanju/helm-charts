@@ -63,6 +63,23 @@ entries:
     version: 0.1.0
   home-assistant:
   - apiVersion: v2
+    appVersion: 2024.1.5
+    created: "2024-01-20T21:18:27.323546607Z"
+    description: A Helm chart for Kubernetes
+    digest: 22a35d0b6d2e98cb5fe86330cbc1616287d0cfe386a48c2fe8d68cb0e25d7caa
+    home: https://github.com/toanju/helm-charts/
+    maintainers:
+    - email: toanju@users.noreply.github.com
+      name: toanju
+      url: https://github.com/toanju/
+    name: home-assistant
+    sources:
+    - https://github.com/home-assistant/core
+    type: application
+    urls:
+    - https://github.com/toanju/helm-charts/releases/download/home-assistant-2024.1.5/home-assistant-2024.1.5.tgz
+    version: 2024.1.5
+  - apiVersion: v2
     appVersion: 2024.1.4
     created: "2024-01-19T21:49:06.974511569Z"
     description: A Helm chart for Kubernetes
@@ -318,10 +335,10 @@ entries:
     - https://github.com/toanju/helm-charts/releases/download/home-assistant-2023.10.3/home-assistant-2023.10.3.tgz
     version: 2023.10.3
   - apiVersion: v2
-    appVersion: 2023.10.4
-    created: "2023-10-21T19:58:00.106628582Z"
+    appVersion: 2023.10.3
+    created: "2023-10-15T18:55:33.846677662Z"
     description: A Helm chart for Kubernetes
-    digest: 213c7fb88afd719f5b4a7e08952bf4c80973ad44251b8eed4e11c69201d32538
+    digest: 173876e15129094483f4314d9aa1cb453744b5bfe98a5b44da97f0b1e4f6152c
     home: https://github.com/toanju/helm-charts/
     maintainers:
     - email: toanju@users.noreply.github.com
@@ -335,10 +352,10 @@ entries:
     - https://github.com/toanju/helm-charts/releases/download/home-assistant-2023.10.3-1/home-assistant-2023.10.3-1.tgz
     version: 2023.10.3-1
   - apiVersion: v2
-    appVersion: 2023.10.3
-    created: "2023-10-15T18:55:33.846677662Z"
+    appVersion: 2023.10.4
+    created: "2023-10-21T19:58:00.106628582Z"
     description: A Helm chart for Kubernetes
-    digest: 173876e15129094483f4314d9aa1cb453744b5bfe98a5b44da97f0b1e4f6152c
+    digest: 213c7fb88afd719f5b4a7e08952bf4c80973ad44251b8eed4e11c69201d32538
     home: https://github.com/toanju/helm-charts/
     maintainers:
     - email: toanju@users.noreply.github.com
@@ -1363,4 +1380,4 @@ entries:
     urls:
     - https://github.com/toanju/helm-charts/releases/download/zigbee2mqtt-0.1.0/zigbee2mqtt-0.1.0.tgz
     version: 0.1.0
-generated: "2024-01-19T21:49:06.974896848Z"
+generated: "2024-01-20T21:18:27.32390989Z"
