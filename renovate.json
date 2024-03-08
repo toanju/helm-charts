@@ -5,7 +5,9 @@
 	],
 	"packageRules": [
 		{
+			"matchDepNames": "ghcr.io/pi-hole/pihole",
 			"matchUpdateTypes": [
+				"major",
 				"minor",
 				"patch",
 				"pin",
@@ -43,20 +45,6 @@
 		},
 		{
 			"customType": "regex",
-			"description": "Update pi-hole container image references",
-			"fileMatch": [
-				"^charts\\/pi-hole\\/Chart\\.yaml$"
-			],
-			"matchStrings": [
-				"appVersion: \"(?<currentValue>.*?)\"\\s+",
-				"version: (?<currentValue>.*?)\\s+"
-			],
-			"depNameTemplate": "ghcr.io/pi-hole/pihole",
-			"datasourceTemplate": "docker",
-			"versioningTemplate": "regex:^v?(?<major>\\d+)\\.0*(?<minor>\\d+)\\.(?<patch>\\d+)?$"
-		},
-		{
-			"customType": "regex",
 			"description": "Update zigbee2mqtt container image references",
 			"fileMatch": [
 				"^charts\\/zigbee2mqtt\\/Chart\\.yaml$"
@@ -67,6 +55,15 @@
 			],
 			"depNameTemplate": "ghcr.io/koenkk/zigbee2mqtt",
 			"datasourceTemplate": "docker"
+		},
+		{
+			"customType": "regex",
+			"fileMatch": [
+				"(^|/)Chart\\.yaml$"
+			],
+			"matchStrings": [
+				"# renovate: datasource=(?<datasource>[a-z-.]+?) depName=(?<depName>[^\\s]+?)(?: (lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?(?: registryUrl=(?<registryUrl>[^\\s]+?))?\\s(?:appVersion|version): \\\"?(?<currentValue>.+?)\\\"?\\s"
+			]
 		}
 	]
 }
