@@ -24,7 +24,7 @@ type: application
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
 # renovate: datasource=docker depName=ghcr.io/pi-hole/pihole
-version: 2024.1.0
+version: 2024.2.2
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
@@ -32,4 +32,4 @@ version: 2024.1.0
 # It is recommended to use it with quotes.
 # https://github.com/pi-hole/docker-pi-hole/releases
 # renovate: datasource=docker depName=ghcr.io/pi-hole/pihole
-appVersion: "2024.01.0"
+appVersion: "2024.02.2"
