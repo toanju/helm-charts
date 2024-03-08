@@ -35,7 +35,8 @@
         "version: (?<currentValue>.*?)\\s+"
       ],
       "depNameTemplate": "ghcr.io/pi-hole/pihole",
-      "datasourceTemplate": "docker"
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "regex:^v?(?<major>\\d+)\\.0*(?<minor>\\d+)\\.0*(?<patch>\\d+)?$"
     },
     {
       "customType": "regex",
