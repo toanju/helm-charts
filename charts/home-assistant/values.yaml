@@ -34,13 +34,34 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-ports:
-  http:
-    port: 80
-    containerPort: 8123
-    protocol: TCP
+extraPorts: {}
+  # service and deployment ports
+  #
+  ### naming a port http will override the default port 8123
+  #
+  #  http:
+  #    servicePort: 80
+  #    containerPort: 8888
+  #    protocol: TCP
+  #
+  ### e.g. using sonos device (see https://www.home-assistant.io/integrations/sonos/#network-requirements for details)
+  #  sonos:
+  #    servicePort: 1400
+  #    containerPort: 1400
+  #    protocol: TCP
 
 service:
+  # main service for http only
+  type: ClusterIP
+  # see https://kubernetes.io/docs/concepts/services-networking/dual-stack/
+  ipFamilyPolicy: "SingleStack"
+  # see https://kubernetes.io/docs/concepts/services-networking/dual-stack/
+  ipFamilies:
+  - IPv4
+  annotations: {}
+
+extraService:
+  # extra service in case additional ports are exposed
   type: ClusterIP
   # see https://kubernetes.io/docs/concepts/services-networking/dual-stack/
   ipFamilyPolicy: "SingleStack"

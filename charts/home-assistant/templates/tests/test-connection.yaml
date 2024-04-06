@@ -11,5 +11,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['{{ include "home-assistant.fullname" . }}:{{ .Values.ports.http.port }}']
+      args: ['{{ include "home-assistant.fullname" . }}:80']
   restartPolicy: Never

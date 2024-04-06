@@ -1,0 +1,31 @@
+{{- if .Values.extraPorts -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "home-assistant.fullname" . }}-extra
+  labels:
+    {{- include "home-assistant.labels" . | nindent 4 }}
+  {{- with .Values.extraService.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ .Values.extraService.type }}
+  {{- if .Values.extraService.ipFamilyPolicy }}
+  ipFamilyPolicy: {{ .Values.extraService.ipFamilyPolicy }}
+  {{- end }}
+  {{- if .Values.extraService.ipFamilies }}
+  ipFamilies: {{ toYaml .Values.extraService.ipFamilies | nindent 4 }}
+  {{- end }}
+  ports:
+  {{- range $name, $v := .Values.extraPorts }}
+  {{- if not (eq $name "http") }}
+    - port: {{ $v.servicePort }}
+      name: {{ $name }}
+      targetPort: {{ $name }}
+      protocol: {{ $v.protocol | default "TCP" | quote }}
+  {{- end }}
+  {{- end }}
+  selector:
+    {{- include "home-assistant.selectorLabels" . | nindent 4 }}
+{{- end }}

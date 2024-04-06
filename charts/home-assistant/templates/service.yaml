@@ -17,11 +17,16 @@ spec:
   ipFamilies: {{ toYaml .Values.service.ipFamilies | nindent 4 }}
   {{- end }}
   ports:
-  {{- range $name, $v := .Values.ports }}
-    - port: {{ $v.port }}
-      name: {{ $name }}
-      targetPort: {{ $name }}
-      protocol: {{ $v.protocol | default "TCP" | quote }}
+  {{- if and .Values.extraPorts .Values.extraPorts.http }}
+    - port: {{ .Values.extraPorts.http.servicePort | default 80 }}
+      name: http
+      targetPort: http
+      protocol: {{ .Values.extraPorts.http.protocol | default "TCP" | quote }}
+  {{- else }}
+    - port: 80
+      name: http
+      targetPort: http
+      protocol: TCP
   {{- end }}
   selector:
     {{- include "home-assistant.selectorLabels" . | nindent 4 }}
