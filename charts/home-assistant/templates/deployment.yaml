@@ -42,7 +42,12 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           ports:
-          {{- range $name, $v := .Values.ports }}
+          {{- if not (hasKey .Values.extraPorts "http") }}
+            - containerPort: 8123
+              name: http
+              protocol: TCP
+          {{- end }}
+          {{- range $name, $v := .Values.extraPorts }}
             - containerPort: {{ $v.containerPort }}
               name: {{ $name }}
               protocol: {{ $v.protocol | default "TCP" | quote }}
