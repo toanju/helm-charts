@@ -55,13 +55,13 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: {{ .Values.service.ports.http }}
+              containerPort: {{ .Values.service.web.ports.http }}
               protocol: TCP
             - name: dnstcp
-              containerPort: {{ .Values.service.ports.dnstcp }}
+              containerPort: {{ .Values.service.dns.ports.dnstcp }}
               protocol: TCP
             - name: dnsudp
-              containerPort: {{ .Values.service.ports.dnsudp }}
+              containerPort: {{ .Values.service.dns.ports.dnsudp }}
               protocol: UDP
           livenessProbe:
             httpGet:
