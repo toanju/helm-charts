@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "pi-hole.fullname" . }}-web
+  labels:
+    {{- include "pi-hole.labels" . | nindent 4 }}
+  {{- with .Values.service.web.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ .Values.service.web.type }}
+{{- if .Values.service.web.ipFamilyPolicy }}
+  ipFamilyPolicy: {{ .Values.service.web.ipFamilyPolicy }}
+{{- end }}
+{{- if .Values.service.web.ipFamilies }}
+  ipFamilies: {{ toYaml .Values.service.web.ipFamilies | nindent 4 }}
+{{- end }}
+  ports:
+    - port: {{ .Values.service.web.ports.http }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "pi-hole.selectorLabels" . | nindent 4 }}

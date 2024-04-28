@@ -11,5 +11,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['{{ include "pi-hole.fullname" . }}:{{ .Values.service.ports.http }}/admin/login.php']
+      args: ['{{ include "pi-hole.fullname" . }}-web:{{ .Values.service.web.ports.http }}/admin/login.php']
   restartPolicy: Never
