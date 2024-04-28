@@ -79,3 +79,7 @@ dnsPolicy: Default
 wireguard:
   secret:
     name: wg0-config
+
+
+extraObjects: []
+# additional objects deployed. Objects are subject to templating.
