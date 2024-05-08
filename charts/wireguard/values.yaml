@@ -80,6 +80,22 @@ wireguard:
   secret:
     name: wg0-config
 
+externalSecret:
+  enabled: false
+  refreshInterval: 1h
+  secretStoreRef:
+    name: vault-backend
+    kind: SecretStore
+  remoteRefs:
+    interface:
+      address: {}
+      privateKey: {}
+    peers: []
+      # - publicKey: {}
+      #   presharedKey: {}
+      #   allowedIPs: {}
+      #   endpoint: {}
+      #   keepalive: {}
 
 extraObjects: []
 # additional objects deployed. Objects are subject to templating.
