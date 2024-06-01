@@ -1415,6 +1415,23 @@ entries:
     version: 37.100.0
   wireguard:
   - apiVersion: v2
+    appVersion: v0.4.0
+    created: "2024-06-01T13:17:14.075846826Z"
+    description: A Helm chart for Kubernetes
+    digest: b71d9485ad4b21c0f77eb7a3b8180e6f1dc68e324422a5ede1cf9f1d045b1f07
+    home: https://github.com/toanju/helm-charts/
+    maintainers:
+    - email: toanju@users.noreply.github.com
+      name: toanju
+      url: https://github.com/toanju/
+    name: wireguard
+    sources:
+    - https://github.com/toanju/wgc/
+    type: application
+    urls:
+    - https://github.com/toanju/helm-charts/releases/download/wireguard-v0.4.0/wireguard-v0.4.0.tgz
+    version: v0.4.0
+  - apiVersion: v2
     appVersion: 0.3.0
     created: "2024-05-09T12:20:19.260828811Z"
     description: A Helm chart for Kubernetes
@@ -2006,4 +2023,4 @@ entries:
     urls:
     - https://github.com/toanju/helm-charts/releases/download/zigbee2mqtt-0.1.0/zigbee2mqtt-0.1.0.tgz
     version: 0.1.0
-generated: "2024-06-01T09:47:20.03718729Z"
+generated: "2024-06-01T13:17:14.076114989Z"
