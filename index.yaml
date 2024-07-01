@@ -1690,6 +1690,23 @@ entries:
     version: 0.1.0
   zigbee2mqtt:
   - apiVersion: v2
+    appVersion: 1.39.0
+    created: "2024-07-01T18:47:28.860528039Z"
+    description: A Helm chart for Kubernetes
+    digest: 962ccd5f463e1ab670c53fc6448d5af747e607dff1c4ca2fd00d293b18a4fe63
+    home: https://github.com/toanju/helm-charts/
+    maintainers:
+    - email: toanju@users.noreply.github.com
+      name: toanju
+      url: https://github.com/toanju/
+    name: zigbee2mqtt
+    sources:
+    - https://github.com/Koenkk/zigbee2mqtt
+    type: application
+    urls:
+    - https://github.com/toanju/helm-charts/releases/download/zigbee2mqtt-1.39.0/zigbee2mqtt-1.39.0.tgz
+    version: 1.39.0
+  - apiVersion: v2
     appVersion: 1.38.0
     created: "2024-06-01T09:47:20.03681369Z"
     description: A Helm chart for Kubernetes
@@ -2148,4 +2165,4 @@ entries:
     urls:
     - https://github.com/toanju/helm-charts/releases/download/zigbee2mqtt-0.1.0/zigbee2mqtt-0.1.0.tgz
     version: 0.1.0
-generated: "2024-06-23T19:32:52.010840684Z"
+generated: "2024-07-01T18:47:28.86083324Z"
