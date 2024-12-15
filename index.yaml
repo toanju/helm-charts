@@ -1600,6 +1600,25 @@ entries:
     urls:
     - https://github.com/toanju/helm-charts/releases/download/mosquitto-0.1.0/mosquitto-0.1.0.tgz
     version: 0.1.0
+  music-assistant:
+  - apiVersion: v2
+    appVersion: 2.3.3
+    created: "2024-12-15T17:17:11.59535698Z"
+    description: A Helm chart for Kubernetes
+    digest: affcf5b95ab301eab06c048d1260c02ddb19a2c239f72ded2aab40a58e475e3a
+    home: https://github.com/toanju/helm-charts
+    maintainers:
+    - email: toanju@users.noreply.github.com
+      name: toanju
+      url: https://github.com/toanju/
+    name: music-assistant
+    sources:
+    - https://github.com/toanju/helm-charts
+    - https://github.com/music-assistant/server
+    type: application
+    urls:
+    - https://github.com/toanju/helm-charts/releases/download/music-assistant-2.3.3/music-assistant-2.3.3.tgz
+    version: 2.3.3
   pi-hole:
   - apiVersion: v2
     appVersion: 2024.07.0
@@ -2838,4 +2857,4 @@ entries:
     urls:
     - https://github.com/toanju/helm-charts/releases/download/zigbee2mqtt-0.1.0/zigbee2mqtt-0.1.0.tgz
     version: 0.1.0
-generated: "2024-12-14T15:11:05.781112296Z"
+generated: "2024-12-15T17:17:11.595717813Z"
