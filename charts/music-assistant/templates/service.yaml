@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "music-assistant.fullname" . }}
+  labels:
+    {{- include "music-assistant.labels" . | nindent 4 }}
+  {{- with .Values.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ .Values.service.type }}
+  {{- if .Values.service.ipFamilyPolicy }}
+  ipFamilyPolicy: {{ .Values.service.ipFamilyPolicy }}
+  {{- end }}
+  {{- if .Values.service.ipFamilies }}
+  ipFamilies: {{ toYaml .Values.service.ipFamilies | nindent 4 }}
+  {{- end }}
+  ports:
+  {{- if and .Values.extraPorts .Values.extraPorts.http }}
+    - port: {{ .Values.extraPorts.http.servicePort | default 80 }}
+      name: http
+      targetPort: http
+      protocol: {{ .Values.extraPorts.http.protocol | default "TCP" | quote }}
+  {{- else }}
+    - port: 80
+      name: http
+      targetPort: http
+      protocol: TCP
+  {{- end }}
+  selector:
+    {{- include "music-assistant.selectorLabels" . | nindent 4 }}

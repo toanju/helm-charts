@@ -1,0 +1,4 @@
+{{- range .Values.extraObjects }}
+---
+{{ include "music-assistant.render" (dict "value" . "context" $) }}
+{{- end }}

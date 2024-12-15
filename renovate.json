@@ -1,69 +1,82 @@
 {
-	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": [
-		"github>toanju/renovate-config"
-	],
-	"packageRules": [
-		{
-			"matchDepNames": "ghcr.io/pi-hole/pihole",
-			"matchUpdateTypes": [
-				"major",
-				"minor",
-				"patch",
-				"pin",
-				"digest"
-			],
-			"automerge": false
-		}
-	],
-	"customManagers": [
-		{
-			"customType": "regex",
-			"description": "Update home-assistant container image references",
-			"fileMatch": [
-				"^charts\\/home-assistant\\/Chart\\.yaml$"
-			],
-			"matchStrings": [
-				"appVersion: \"(?<currentValue>.*?)\"\\s+",
-				"version: (?<currentValue>.*?)\\s+"
-			],
-			"depNameTemplate": "ghcr.io/home-assistant/home-assistant",
-			"datasourceTemplate": "docker"
-		},
-		{
-			"customType": "regex",
-			"description": "Update mosquitto container image references",
-			"fileMatch": [
-				"^charts\\/mosquitto\\/Chart\\.yaml$"
-			],
-			"matchStrings": [
-				"appVersion: \"(?<currentValue>.*?)\"\\s+",
-				"version: (?<currentValue>.*?)\\s+"
-			],
-			"depNameTemplate": "eclipse-mosquitto",
-			"datasourceTemplate": "docker"
-		},
-		{
-			"customType": "regex",
-			"description": "Update zigbee2mqtt container image references",
-			"fileMatch": [
-				"^charts\\/zigbee2mqtt\\/Chart\\.yaml$"
-			],
-			"matchStrings": [
-				"appVersion: \"(?<currentValue>.*?)\"\\s+",
-				"version: (?<currentValue>.*?)\\s+"
-			],
-			"depNameTemplate": "ghcr.io/koenkk/zigbee2mqtt",
-			"datasourceTemplate": "docker"
-		},
-		{
-			"customType": "regex",
-			"fileMatch": [
-				"(^|/)Chart\\.yaml$"
-			],
-			"matchStrings": [
-				"# renovate: datasource=(?<datasource>[a-z-.]+?) depName=(?<depName>[^\\s]+?)(?: (lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?(?: registryUrl=(?<registryUrl>[^\\s]+?))?\\s(?:appVersion|version): \\\"?(?<currentValue>.+?)\\\"?\\s"
-			]
-		}
-	]
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "github>toanju/renovate-config"
+  ],
+  "packageRules": [
+    {
+      "matchDepNames": "ghcr.io/pi-hole/pihole",
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "automerge": false
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Update home-assistant container image references",
+      "fileMatch": [
+        "^charts\\/home-assistant\\/Chart\\.yaml$"
+      ],
+      "matchStrings": [
+        "appVersion: \"(?<currentValue>.*?)\"\\s+",
+        "version: (?<currentValue>.*?)\\s+"
+      ],
+      "depNameTemplate": "ghcr.io/home-assistant/home-assistant",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "Update music-assistant container image references",
+      "fileMatch": [
+        "^charts\\/music-assistant\\/Chart\\.yaml$"
+      ],
+      "matchStrings": [
+        "appVersion: \"(?<currentValue>.*?)\"\\s+",
+        "version: (?<currentValue>.*?)\\s+"
+      ],
+      "depNameTemplate": "ghcr.io/music-assistant/server",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "Update mosquitto container image references",
+      "fileMatch": [
+        "^charts\\/mosquitto\\/Chart\\.yaml$"
+      ],
+      "matchStrings": [
+        "appVersion: \"(?<currentValue>.*?)\"\\s+",
+        "version: (?<currentValue>.*?)\\s+"
+      ],
+      "depNameTemplate": "eclipse-mosquitto",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "Update zigbee2mqtt container image references",
+      "fileMatch": [
+        "^charts\\/zigbee2mqtt\\/Chart\\.yaml$"
+      ],
+      "matchStrings": [
+        "appVersion: \"(?<currentValue>.*?)\"\\s+",
+        "version: (?<currentValue>.*?)\\s+"
+      ],
+      "depNameTemplate": "ghcr.io/koenkk/zigbee2mqtt",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "(^|/)Chart\\.yaml$"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>[a-z-.]+?) depName=(?<depName>[^\\s]+?)(?: (lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?(?: registryUrl=(?<registryUrl>[^\\s]+?))?\\s(?:appVersion|version): \\\"?(?<currentValue>.+?)\\\"?\\s"
+      ]
+    }
+  ]
 }

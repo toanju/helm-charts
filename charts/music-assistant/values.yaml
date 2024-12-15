@@ -1,0 +1,148 @@
+# Default values for music-assistant.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: ghcr.io/music-assistant/server
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+  {}
+  # fsGroup: 2000
+
+securityContext:
+  {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+extraPorts:
+  {}
+  # service and deployment ports
+  #
+  ### naming a port http will override the default port 8095, e.g.
+  #
+  #  http:
+  #    servicePort: 80
+  #    containerPort: 8888
+  #    protocol: TCP
+  #
+  ### expos port for streaming
+  #  sonos:
+  #    servicePort: 8097
+  #    containerPort: 8097
+  #    protocol: TCP
+
+service:
+  # main service for http only
+  type: ClusterIP
+  # see https://kubernetes.io/docs/concepts/services-networking/dual-stack/
+  ipFamilyPolicy: "SingleStack"
+  # see https://kubernetes.io/docs/concepts/services-networking/dual-stack/
+  ipFamilies:
+    - IPv4
+  annotations: {}
+
+extraService:
+  # extra service in case additional ports are exposed
+  type: ClusterIP
+  # see https://kubernetes.io/docs/concepts/services-networking/dual-stack/
+  ipFamilyPolicy: "SingleStack"
+  # see https://kubernetes.io/docs/concepts/services-networking/dual-stack/
+  ipFamilies:
+    - IPv4
+  annotations: {}
+
+resources:
+  {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# Set to true to enable services like UPnP/SSDP
+hostNetwork: false
+
+dnsPolicy: ClusterFirst
+
+persistence:
+  # persistence.enabled If true, use a Persistent Volume Claim. If false, use emptyDir.
+  enabled: false
+
+  # Must match those of existing PV or dynamic provisioner
+  # Ref: https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+  accessModes:
+    - ReadWriteOncePod
+
+  # Persistent Volume Claim annotations
+  annotations: {}
+
+  # PVC must be created manually before volume will be bound
+  existingClaim: ""
+
+  # Persistent Volume size
+  #
+  size: 1Gi
+
+  ## Persistent Volume Storage Class Name
+  storageClassName: ""
+
+  # Persistent Volume Binding Mode
+  volumeBindingMode: ""
+
+  # Persistent Volume Claim Selector
+  # Useful if Persistent Volumes have been provisioned in advance
+  # Ref: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#selector
+  # e.g.:
+  # selector:
+  #  matchLabels:
+  #    release: "stable"
+  #  matchExpressions:
+  #    - { key: environment, operator: In, values: [ dev ] }
+  selector: {}
+
+  # Persistent Volume Name
+  volumeName: ""
+
+strategy:
+  {}
+  # Deployment strategy
+  # e.g.
+  # type: Recreate
+
+exrtaObjects: []
+
+ma:
+  env: []
