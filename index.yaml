@@ -1638,6 +1638,24 @@ entries:
     version: 0.1.0
   music-assistant:
   - apiVersion: v2
+    appVersion: 2.3.6
+    created: "2025-01-08T00:32:36.852564852Z"
+    description: A Helm chart for Kubernetes
+    digest: d261e6d0ec0dd753fb3470be699bd013af4035fb9d2bd2adbed2b9fac4557229
+    home: https://github.com/toanju/helm-charts
+    maintainers:
+    - email: toanju@users.noreply.github.com
+      name: toanju
+      url: https://github.com/toanju/
+    name: music-assistant
+    sources:
+    - https://github.com/toanju/helm-charts
+    - https://github.com/music-assistant/server
+    type: application
+    urls:
+    - https://github.com/toanju/helm-charts/releases/download/music-assistant-2.3.6/music-assistant-2.3.6.tgz
+    version: 2.3.6
+  - apiVersion: v2
     appVersion: 2.3.5
     created: "2025-01-02T18:02:52.691688256Z"
     description: A Helm chart for Kubernetes
@@ -2929,4 +2947,4 @@ entries:
     urls:
     - https://github.com/toanju/helm-charts/releases/download/zigbee2mqtt-0.1.0/zigbee2mqtt-0.1.0.tgz
     version: 0.1.0
-generated: "2025-01-02T18:02:52.692159559Z"
+generated: "2025-01-08T00:32:36.852933292Z"
