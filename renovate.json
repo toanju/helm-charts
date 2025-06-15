@@ -20,8 +20,8 @@
     {
       "customType": "regex",
       "description": "Update home-assistant container image references",
-      "fileMatch": [
-        "^charts\\/home-assistant\\/Chart\\.yaml$"
+      "managerFilePatterns": [
+        "/^charts\\/home-assistant\\/Chart\\.yaml$/"
       ],
       "matchStrings": [
         "appVersion: \"(?<currentValue>.*?)\"\\s+",
@@ -33,8 +33,8 @@
     {
       "customType": "regex",
       "description": "Update music-assistant container image references",
-      "fileMatch": [
-        "^charts\\/music-assistant\\/Chart\\.yaml$"
+      "managerFilePatterns": [
+        "/^charts\\/music-assistant\\/Chart\\.yaml$/"
       ],
       "matchStrings": [
         "appVersion: \"(?<currentValue>.*?)\"\\s+",
@@ -46,8 +46,8 @@
     {
       "customType": "regex",
       "description": "Update mosquitto container image references",
-      "fileMatch": [
-        "^charts\\/mosquitto\\/Chart\\.yaml$"
+      "managerFilePatterns": [
+        "/^charts\\/mosquitto\\/Chart\\.yaml$/"
       ],
       "matchStrings": [
         "appVersion: \"(?<currentValue>.*?)\"\\s+",
@@ -59,8 +59,8 @@
     {
       "customType": "regex",
       "description": "Update zigbee2mqtt container image references",
-      "fileMatch": [
-        "^charts\\/zigbee2mqtt\\/Chart\\.yaml$"
+      "managerFilePatterns": [
+        "/^charts\\/zigbee2mqtt\\/Chart\\.yaml$/"
       ],
       "matchStrings": [
         "appVersion: \"(?<currentValue>.*?)\"\\s+",
@@ -71,8 +71,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "(^|/)Chart\\.yaml$"
+      "managerFilePatterns": [
+        "/(^|/)Chart\\.yaml$/"
       ],
       "matchStrings": [
         "# renovate: datasource=(?<datasource>[a-z-.]+?) depName=(?<depName>[^\\s]+?)(?: (lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?(?: registryUrl=(?<registryUrl>[^\\s]+?))?\\s(?:appVersion|version): \\\"?(?<currentValue>.+?)\\\"?\\s"
