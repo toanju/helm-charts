@@ -43,7 +43,7 @@ spec:
               protocol: UDP
           livenessProbe:
             httpGet:
-              path: /admin/
+              path: /admin/login
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
