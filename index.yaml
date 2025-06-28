@@ -1836,6 +1836,24 @@ entries:
     version: 2.3.3
   pi-hole:
   - apiVersion: v2
+    appVersion: 2025.06.2
+    created: "2025-06-28T18:01:57.079363238Z"
+    description: A Helm chart for Kubernetes
+    digest: 9fe96138240648fc7e9cf5313995463971fdf870056218faf8cffed3841becac
+    home: https://github.com/toanju/helm-charts/
+    maintainers:
+    - email: toanju@users.noreply.github.com
+      name: toanju
+      url: https://github.com/toanju/
+    name: pi-hole
+    sources:
+    - https://github.com/pi-hole/pi-hole
+    - https://github.com/pi-hole/docker-pi-hole
+    type: application
+    urls:
+    - https://github.com/toanju/helm-charts/releases/download/pi-hole-2025.6.2/pi-hole-2025.6.2.tgz
+    version: 2025.6.2
+  - apiVersion: v2
     appVersion: 2024.07.0
     created: "2024-07-09T19:36:36.774703428Z"
     description: A Helm chart for Kubernetes
@@ -3089,4 +3107,4 @@ entries:
     urls:
     - https://github.com/toanju/helm-charts/releases/download/zigbee2mqtt-0.1.0/zigbee2mqtt-0.1.0.tgz
     version: 0.1.0
-generated: "2025-06-24T14:03:47.03370473Z"
+generated: "2025-06-28T18:01:57.079778907Z"
