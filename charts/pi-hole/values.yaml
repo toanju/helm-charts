@@ -114,6 +114,8 @@ persistence:
   # Persistent Volume Name
   volumeName: ""
 
+initContainers: []
+
 pihole:
   env:
     TZ: UTC
