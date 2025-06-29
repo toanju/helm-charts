@@ -114,7 +114,24 @@ persistence:
   # Persistent Volume Name
   volumeName: ""
 
+extraObjects: []
+  # List of extra objects to be deployed with the chart.
+  # Useful for creating ConfigMaps, Secrets, etc.
+  # e.g.
+  # - apiVersion: v1
+  #   kind: ConfigMap
+  #   metadata:
+  #     name: my-config
+  #   data:
+  #     key: value
+
 initContainers: []
+  # List of init containers to be added to the deployment.
+  # Useful for running pre-start tasks.
+  # e.g.
+  # - name: my-init-container
+  #   image: busybox
+  #   command: ['sh', '-c', 'echo Hello from init container']
 
 pihole:
   env:
