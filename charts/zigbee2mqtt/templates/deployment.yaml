@@ -47,6 +47,9 @@ spec:
               name: data-volume
             - mountPath: /config
               name: config-volume
+      {{- with .Values.initContainers }}
+        {{- toYaml . | nindent 8 }}
+      {{- end}}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
