@@ -30,4 +30,4 @@ version: 0.4.6-1
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 # renovate: datasource=docker depName=ghcr.io/toanju/wgc
-appVersion: "0.4.5"
+appVersion: "0.4.6"
