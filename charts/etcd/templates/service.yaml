@@ -1,0 +1,28 @@
+# headless service for etcd StatefulSet
+# TODO rename
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "etcd.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "etcd.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  clusterIP: None
+  publishNotReadyAddresses: true
+  ports:
+    - name: etcd-client
+      port: {{ .Values.service.client.port }}
+      targetPort: etcd-client
+      protocol: TCP
+    - name: etcd-server
+      port: {{ .Values.service.server.port }}
+      targetPort: etcd-server
+      protocol: TCP
+    - name: etcd-metrics
+      port: {{ .Values.service.metrics.port }}
+      targetPort: etcd-metrics
+      protocol: TCP
+  selector:
+    {{- include "etcd.selectorLabels" . | nindent 4 }}
