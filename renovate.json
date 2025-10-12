@@ -19,6 +19,19 @@
   "customManagers": [
     {
       "customType": "regex",
+      "description": "Update etcd container image references",
+      "managerFilePatterns": [
+        "/^charts\\/etcd\\/Chart\\.yaml$/"
+      ],
+      "matchStrings": [
+        "appVersion: \"(?<currentValue>.*?)\"\\s+",
+        "version: (?<currentValue>.*?)\\s+"
+      ],
+      "depNameTemplate": "quay.io/coreos/etcd",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
       "description": "Update home-assistant container image references",
       "managerFilePatterns": [
         "/^charts\\/home-assistant\\/Chart\\.yaml$/"
