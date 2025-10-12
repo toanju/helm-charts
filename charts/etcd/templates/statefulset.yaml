@@ -7,7 +7,6 @@ spec:
   ##
   ## The service name is being set to leverage the service headlessly.
   ## https://kubernetes.io/docs/concepts/services-networking/service/#headless-services
-  # TODO use printf and truncate the service name
   {{- $serviceName := printf "%s-headless" (include "etcd.fullname" .) | trunc 63 | trimSuffix "-" }}
   serviceName: {{ $serviceName }}
   ##
@@ -186,8 +185,9 @@ spec:
         ## the cluster up, this should be changed to "existing" when the replica
         ## count is increased. If set incorrectly, etcd makes an attempt to
         ## start but fail safely.
-        # TODO add variable
-        - --initial-cluster-state=new
+        {{- if .Values.etcd.existingCluster }}
+        - --initial-cluster-state=existing
+        {{- end }}
         ##
         ## Token used for cluster initialization. The recommendation for this is
         ## to use a unique token for every cluster. This example parameterized
@@ -213,20 +213,20 @@ spec:
         ## This avoids probe failure if you opt to configure TLS.
         - --listen-metrics-urls=http://0.0.0.0:8080
         ##
-        ## TODO
+        ## TODO consider compactation
         ## These are some configurations you may want to consider enabling, but
         ## should look into further to identify what settings are best for you.
         # - --auto-compaction-mode=periodic
         # - --auto-compaction-retention=10m
         ##
-        ## TODO
+        ## TODO tls
         ## TLS client configuration for etcd, reusing the etcdctl env vars.
         # - --client-cert-auth
         # - --trusted-ca-file=$(ETCDCTL_CACERT)
         # - --cert-file=$(ETCDCTL_CERT)
         # - --key-file=$(ETCDCTL_KEY)
         ##
-        ## TODO
+        ## TODO tls
         ## TLS server configuration for etcdctl in the container.
         ## These files paths are part of the "etcd-server-certs" volume mount.
         # - --peer-client-cert-auth
@@ -239,27 +239,27 @@ spec:
         - name: etcd-data
           mountPath: /data
         ##
-        ## TODO
+        ## TODO tls
         ## TLS client configuration for etcdctl
         # - name: etcd-client-tls
         #   mountPath: "/etc/etcd/certs/client"
         #   readOnly: true
         ##
-        ## TODO
+        ## TODO tls
         ## TLS server configuration
         # - name: etcd-server-tls
         #   mountPath: "/etc/etcd/certs/server"
         #   readOnly: true
       volumes:
       ##
-      ## TODO
+      ## TODO tls
       ## TLS client configuration
       # - name: etcd-client-tls
       #   secret:
       #     secretName: etcd-client-tls
       #     optional: false
       ##
-      ## TODO
+      ## TODO tls
       ## TLS server configuration
       # - name: etcd-server-tls
       #   secret:

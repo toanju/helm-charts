@@ -51,6 +51,7 @@ securityContext: {}
 
 # This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
 service:
+  enabled: true
   # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
   type: ClusterIP
   # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
@@ -124,3 +125,8 @@ persistence:
   accessModes: ["ReadWriteOnce"]
   size: 2Gi
   storageClass: ""
+
+etcd:
+  ## Must be false during bootstrap of a new cluster. To scale a cluster or
+  ## upgrade it, set to true.
+  existingCluster: false
