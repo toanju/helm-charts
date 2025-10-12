@@ -7,7 +7,9 @@ spec:
   ##
   ## The service name is being set to leverage the service headlessly.
   ## https://kubernetes.io/docs/concepts/services-networking/service/#headless-services
-  serviceName: {{ include "etcd.fullname" . }}
+  # TODO use printf and truncate the service name
+  {{- $serviceName := printf "%s-headless" (include "etcd.fullname" .) | trunc 63 | trimSuffix "-" }}
+  serviceName: {{ $serviceName }}
   ##
   ## If you are increasing the replica count of an existing cluster, you should
   ## also update the --initial-cluster-state flag as noted further down in the
@@ -50,7 +52,7 @@ spec:
         ## the DNS name. It must match the service name created for the etcd
         ## cluster. The choice to place it in an annotation instead of the env
         ## settings is because there should only be 1 service per etcd cluster.
-        serviceName: {{ include "etcd.fullname" . }}
+        serviceName: {{ $serviceName }}
     spec:
       ##
       ## Configuring the node affinity is necessary to prevent etcd servers from
@@ -200,14 +202,9 @@ spec:
         ##   etcd-0=$(URI_SCHEME)://etcd-0.$(SERVICE_NAME):2380
         {{- $initialCluster := list }}
         {{- $etcdFullname := include "etcd.fullname" . }}
-        {{- $etcdHeadlessServiceName := include "etcd.fullname" . }}
-        {{- $releaseNamespace := .Release.Namespace }}
-        {{- $clusterDomain := .Values.clusterDomain | default "cluster.local" }}
         {{- range $e, $i := until (int .Values.replicaCount) }}
-        {{- $initialCluster = append $initialCluster (printf "%s-%d=$(URI_SCHEME)://%s-%d.%s.%s.svc.%s:2380" $etcdFullname $i $etcdFullname $i $etcdHeadlessServiceName $releaseNamespace $clusterDomain) }}
+        {{- $initialCluster = append $initialCluster (printf "%s-%d=$(URI_SCHEME)://%s-%d.$(SERVICE_NAME):2380" $etcdFullname $i $etcdFullname $i) }}
         {{- end }}
-        # TODO template:
-        - --initial-cluster=etcd-0=$(URI_SCHEME)://etcd-0.$(SERVICE_NAME):2380,etcd-1=$(URI_SCHEME)://etcd-1.$(SERVICE_NAME):2380,etcd-2=$(URI_SCHEME)://etcd-2.$(SERVICE_NAME):2380
         - --initial-cluster={{ join "," $initialCluster }}
         ##
         ## The peer urls flag should be fine as-is.

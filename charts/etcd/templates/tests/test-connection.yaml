@@ -11,5 +11,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['{{ include "etcd.fullname" . }}-0.{{ include "etcd.fullname" . }}:{{ .Values.service.metrics.port }}/livez']
+      args: ['{{ include "etcd.fullname" . }}-0.{{ include "etcd.fullname" . }}-headless:{{ .Values.service.metrics.port }}/livez']
   restartPolicy: Never
