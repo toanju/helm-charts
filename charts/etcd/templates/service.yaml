@@ -1,14 +1,13 @@
+{{- if .Values.service.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "etcd.fullname" . }}-headless
+  name: {{ include "etcd.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "etcd.labels" . | nindent 4 }}
 spec:
-  type: ClusterIP
-  clusterIP: None
-  publishNotReadyAddresses: true
+  type: {{ .Values.service.type }}
   ports:
     - name: etcd-client
       port: {{ .Values.service.client.port }}
@@ -24,3 +23,4 @@ spec:
       protocol: TCP
   selector:
     {{- include "etcd.selectorLabels" . | nindent 4 }}
+{{- end }}
