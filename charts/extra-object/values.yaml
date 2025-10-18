@@ -1,9 +1,8 @@
 # use the following syntax to make use of this
 #
 # templates:
-#   - name: template-name
-#     template: |
-#       key: value
-#       namespace: {{ .Release.namespace }}
+#   - |
+#     key: value
+#     namespace: {{ .Release.namespace }}
 #
 templates: []

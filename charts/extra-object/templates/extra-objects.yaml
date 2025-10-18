@@ -1,5 +1,4 @@
 {{ range .Values.templates }}
 ---
-# source name: {{ .name }}
-{{ tpl ( .template | toString) $ }}
+{{ tpl . $ }}
 {{ end }}
