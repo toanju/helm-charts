@@ -1,0 +1,5 @@
+config:
+  jwt_secret: ":bPO6g]8H$dt)B~I,8[FLdDuT8DzY-K<"  # don't use this one
+  ldap_user_pass: "12345678"  # don't set one here...
+  key_file: ""  # prefer key_seed
+  key_seed: "a random string, preferably at least 32 characters long"
