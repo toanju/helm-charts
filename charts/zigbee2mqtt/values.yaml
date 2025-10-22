@@ -100,8 +100,8 @@ persistence:
   ## Persistent Volume Storage Class Name
   storageClassName: ""
 
-  # Persistent Volume Binding Mode
-  volumeBindingMode: ""
+  # Persistent Volume Mode
+  volumeMode: ""
 
   # Persistent Volume Claim Selector
   # Useful if Persistent Volumes have been provisioned in advance
