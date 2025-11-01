@@ -94,8 +94,13 @@ spec:
         - name: config
           projected:
             sources:
+            {{- if .Values.externalSecrets.enabled }}
+            - secret:
+                name: {{ include "lldap.fullname" . }}
+            {{- else }}
             - configMap:
                 name: {{ include "lldap.fullname" . }}
+            {{- end }}
         - name: data
           {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:
