@@ -80,5 +80,5 @@ Convert config values to TOML format
 {{- if $data.smtp_options.port }}
 {{- $data = mergeOverwrite $data (dict "smtp_options" (mergeOverwrite $data.smtp_options (dict "port" (int64 $data.smtp_options.port)))) }}
 {{- end }}
-{{- toToml $data }}
+{{- tpl (toToml $data) . }}
 {{- end }}
