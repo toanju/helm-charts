@@ -168,6 +168,7 @@ persistence:
 externalSecrets:
   # set to enable to use External Secrets to populate lldap_config.toml
   enabled: false
+  refreshPolicy: "Periodic"
   refreshInterval: "1h"
   secretStoreRef:
     name: my-secret-store
