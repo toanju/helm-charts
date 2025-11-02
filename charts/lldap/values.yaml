@@ -122,11 +122,11 @@ readinessProbe:
       - "healthcheck"
       - "--config-file"
       - "/config/lldap_config.toml"
-    initialDelaySeconds: 5
-    periodSeconds: 10
-    timeoutSeconds: 1
-    successThreshold: 1
-    failureThreshold: 3
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 1
+  successThreshold: 1
+  failureThreshold: 3
 
 # Additional volumes on the output Deployment definition.
 volumes: []
