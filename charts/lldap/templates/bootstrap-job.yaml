@@ -48,14 +48,13 @@ spec:
               {{- else }}
               value: "{{ .Values.config.ldap_user_dn }}"
               {{- end }}
+            - name: LLDAP_ADMIN_PASSWORD
             {{- if .Values.externalSecrets.enabled }}
-            - name: LLDAP_ADMIN_PASSWORD_FILE
               valueFrom: 
                 secretKeyRef: 
                   name: {{ include "lldap.fullname" . }}
                   key: ldap_user_pass
             {{- else }}
-            - name: LLDAP_ADMIN_PASSWORD
               value: {{ .Values.config.ldap_user_pass | quote }}
             {{- end }}
             - name: DO_CLEANUP
