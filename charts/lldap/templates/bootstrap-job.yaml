@@ -63,15 +63,19 @@ spec:
             - name: user-schemas
               mountPath: /bootstrap/user-schemas
               readOnly: true
+          {{- if .Values.users }}
             - name: user-configs
               mountPath: /bootstrap/user-configs
               readOnly: true
+          {{- end }}
             - name: group-schemas
               mountPath: /bootstrap/group-schemas
               readOnly: true
+          {{- if .Values.groups }}
             - name: group-configs
               mountPath: /bootstrap/group-configs
               readOnly: true
+          {{- end }}
       volumes:
         - name: user-schemas
           configMap:
