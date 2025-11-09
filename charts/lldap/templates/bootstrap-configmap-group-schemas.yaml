@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "lldap.fullname" . }}-bootstrap-group-schemas
+  labels:
+    {{- include "lldap.labels" . | nindent 4 }}
+data:
+{{/* All schema go to a single file since they apply to the whole LDAP instance */}}
+  group-schemas.json: | {{ toJson .Values.group_schemas | nindent 4 }}

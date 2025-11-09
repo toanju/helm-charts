@@ -175,6 +175,59 @@ externalSecrets:
     kind: SecretStore
   data: []
 
+bootstrapJob:
+  annotations: {}
+  restartPolicy: "OnFailure"
+
+# Bootstrap user schemas
+# Note: Schemas apply to all users
+user_schemas: []
+  # user_schemas:
+  # - name: uid
+  #   attributeType: INTEGER
+  #   isEditable: false
+  #   isList: false
+  #   isVisible: true
+  # - name: mailbox
+  #   attributeType: STRING
+  #   isEditable: false
+  #   isList: false
+  #   isVisible: true
+  # - name: mail-alias    # valid characters are: a-z, A-Z, 0-9, and dash (-).
+  #   attributeType: STRING
+  #   isEditable: false
+  #   isList: true
+  #   isVisible: true
+
+# Bootstrap group schemas (group schemas follow the same format as user schemas)
+# Note: Schemas apply to all groups
+group_schemas: []
+
+# Bootstrap groups
+groups: []
+  # groups:
+  # - name: "group1"
+  # - name: "group2"
+
+# Bootstrap users
+users: []
+  # users:
+  # - id: "username",
+  #   email: "username@example.com"
+  #   # optional attributes
+  #   password: "changeme"
+  #   displayName: "Display Name"
+  #   firstName: "First"
+  #   lastName: "Last"
+  #   avatar_file: "/path/to/avatar.jpg"
+  #   avatar_url: "https://i.imgur.com/nbCxk3z.jpg"
+  #   gravatar_avatar: "false"
+  #   weserv_avatar: "false"
+  #   groups:
+  #   - "group-1"
+  #   - "group-2"
+
+
 config:
   # details in https://github.com/lldap/lldap/blob/main/lldap_config.docker_template.toml
   verbose: false

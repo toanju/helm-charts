@@ -1,5 +1,56 @@
 config:
   jwt_secret: ":bPO6g]8H$dt)B~I,8[FLdDuT8DzY-K<"  # don't use this one
-  ldap_user_pass: "12345678"  # don't set one here...
+  ldap_user_pass: "ABC12345678"  # don't set one here...
   key_file: ""  # prefer key_seed
   key_seed: "a random string, preferably at least 32 characters long"
+
+bootstrapJob:
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-delete-policy": hook-succeeded
+
+user_schemas:
+  - name: "uid"
+    attributeType: INTEGER
+    isEditable: false
+    isList: false
+    isVisible: true
+  - name: "mailbox"
+    attributeType: STRING
+    isEditable: false
+    isList: false
+    isVisible: true
+  - name: "mail-alias"
+    attributeType: STRING
+    isEditable: false
+    isList: true
+    isVisible: true
+
+group_schemas:
+  - name: "gid"
+    attributeType: INTEGER
+    isEditable: false
+    isList: false
+    isVisible: true
+
+groups:
+  - name: "admins"
+  - name: "developers"
+
+users:
+  - id: "alice"
+    email: "alice@example.com"
+    firstName: "Alice"
+    lastName: "Anderson"
+    password: "alicepassword"
+    gravatar_avatar: "true"
+    mailbox: "specialmailbox"
+    groups:
+      - "admins"
+  - id: "bob"
+    email: "bob@example.com"
+    firstName: "Bob"
+    lastName: "Brown"
+    password: "bobpassword"
+    groups:
+      - "developers"

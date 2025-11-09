@@ -1,0 +1,89 @@
+# Sample values.yaml for lldap Helm chart using External Secrets Operator (ESO)
+externalSecrets:
+  # set to enable to use External Secrets to populate lldap_config.toml
+  enabled: true
+  refreshInterval: "1h0m0s"
+  secretStoreRef:
+    name: vault-backend
+    kind: ClusterSecretStore
+
+  data:
+  - secretKey: jwt_secret
+    remoteRef:
+      key: /lldap/auth
+      property: jwt-secret
+  - secretKey: ldap_user_dn
+    remoteRef:
+      key: /lldap/auth
+      property: admin-user-dn
+  - secretKey: ldap_user_email
+    remoteRef:
+      key: /lldap/auth
+      property: admin-user-email
+  - secretKey: ldap_user_pass
+    remoteRef:
+      key: /lldap/auth
+      property: admin-user-password
+  - secretKey: key_seed
+    remoteRef:
+      key: /lldap/seed
+      property: seed
+
+config:
+  jwt_secret: "{{`{{ .jwt_secret }}`}}"
+  ldap_user_dn: "{{`{{ .ldap_user_dn }}`}}"
+  ldap_user_email: "{{`{{ .ldap_user_email }}`}}"
+  ldap_user_pass: "{{`{{ .ldap_user_pass }}`}}"
+  database_url: "{{`{{ .ldap_user_pass }}`}}"
+  key_seed: "{{`{{ .key_seed }}`}}"
+
+bootstrapJob:
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-delete-policy": hook-succeeded
+
+user_schemas:
+  - name: "uid"
+    attributeType: INTEGER
+    isEditable: false
+    isList: false
+    isVisible: true
+  - name: "mailbox"
+    attributeType: STRING
+    isEditable: false
+    isList: false
+    isVisible: true
+  - name: "mail-alias"
+    attributeType: STRING
+    isEditable: false
+    isList: true
+    isVisible: true
+
+group_schemas:
+  - name: "gid"
+    attributeType: INTEGER
+    isEditable: false
+    isList: false
+    isVisible: true
+
+groups:
+  - name: "admins"
+  - name: "developers"
+
+users:
+  - id: "alice"
+    email: "alice@example.com"
+    firstName: "Alice"
+    lastName: "Anderson"
+    password: "alicepassword"
+    gravatar_avatar: "true"
+    mailbox: "specialmailbox"
+    groups:
+      - "admins"
+  - id: "bob"
+    email: "bob@example.com"
+    firstName: "Bob"
+    lastName: "Brown"
+    password: "bobpassword"
+    groups:
+      - "developers"
