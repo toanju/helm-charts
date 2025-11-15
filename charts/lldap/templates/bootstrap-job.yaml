@@ -78,14 +78,38 @@ spec:
           {{- end }}
       volumes:
         - name: user-schemas
+          {{- if and .Values.externalSecrets.enabled (or .Values.externalSecrets.bootstrapUserSchemas.data .Values.externalSecrets.bootstrapUserSchemas.dataFrom) }}
+          secret:
+            secretName: {{ include "lldap.fullname" . }}-bootstrap-user-schemas
+          {{- else }}
           configMap:
             name: {{ include "lldap.fullname" . }}-bootstrap-user-schemas
+          {{- end }}
+        {{- if .Values.users }}
         - name: user-configs
+          {{- if and .Values.externalSecrets.enabled (or .Values.externalSecrets.bootstrapUser.data .Values.externalSecrets.bootstrapUser.dataFrom ) }}
+          secret:
+            secretName: {{ include "lldap.fullname" . }}-bootstrap-user
+          {{- else }}
           configMap:
             name: {{ include "lldap.fullname" . }}-bootstrap-user
+          {{- end }}
+        {{- end }}
         - name: group-schemas
+          {{- if and .Values.externalSecrets.enabled (or .Values.externalSecrets.bootstrapGroupSchemas.data .Values.externalSecrets.bootstrapGroupSchemas.dataFrom) }}
+          secret:
+            secretName: {{ include "lldap.fullname" . }}-bootstrap-group-schemas
+          {{- else }}
           configMap:
             name: {{ include "lldap.fullname" . }}-bootstrap-group-schemas
+          {{- end }}
+        {{- if .Values.groups }}
         - name: group-configs
+          {{- if and .Values.externalSecrets.enabled (or .Values.externalSecrets.bootstrapGroup.data .Values.externalSecrets.bootstrapGroup.dataFrom) }}
+          secret:
+            secretName: {{ include "lldap.fullname" . }}-bootstrap-group
+          {{- else }}
           configMap:
             name: {{ include "lldap.fullname" . }}-bootstrap-group
+          {{- end }}
+        {{- end }}
