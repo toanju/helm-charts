@@ -39,5 +39,15 @@ jobs:
         uses: helm/kind-action@92086f6be054225fa813e0a4b13787fc9088faab # v1.13.0
         if: steps.list-changed.outputs.changed == 'true'
 
+      - name: Install External Secrets Operator
+        if: steps.list-changed.outputs.changed == 'true'
+        run: |
+          # repoURL: https://charts.external-secrets.io
+          # targetRevision: 1.0.0
+          # chart: external-secrets
+          helm repo add external-secrets https://charts.external-secrets.io
+          helm install external-secrets external-secrets/external-secrets \
+            -n external-secrets --create-namespace
+
       - name: Run chart-testing (install)
         run: ct install --config ct-install.yaml

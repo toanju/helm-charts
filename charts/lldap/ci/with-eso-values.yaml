@@ -1,0 +1,144 @@
+extraObjects:
+  - |
+    apiVersion: external-secrets.io/v1
+    kind: SecretStore
+    metadata:
+      name: fake
+      labels: {{- include "lldap.labels" . | nindent 4 }}
+    spec:
+      provider:
+        fake:
+          data:
+            - key: "/lldap/auth"
+              value: ":bPO6g]8H$dt)B~I,8[FLdDuT8DzY-K<"  # don't use this one
+              version: "v1"
+            - key: "/lldap/auth"
+              value: "superadmin"
+              version: "v2"
+            - key: "/lldap/auth"
+              value: "superadmin@example.com"
+              version: "v3"
+            - key: "/lldap/auth"
+              value: "ABC12345678"
+              version: "v4"
+            - key: "/lldap/seed"
+              value: "a random string, preferably at least 32 characters long"
+              version: "v1"
+            - key: "/lldap/user/alice"
+              value: "alicepassword"
+              version: "v1"
+            - key: "/lldap/user/bob"
+              value: "bobpassword"
+              version: "v1"
+
+# Sample values.yaml for lldap Helm chart using External Secrets Operator (ESO)
+externalSecrets:
+  # set to enable to use External Secrets to populate lldap_config.toml
+  enabled: true
+  refreshInterval: "1h0m0s"
+  secretStoreRef:
+    name: fake
+    kind: SecretStore
+
+  config:
+    data:
+      - secretKey: jwt_secret
+        remoteRef:
+          key: /lldap/auth
+          version: v1
+      - secretKey: ldap_user_dn
+        remoteRef:
+          key: /lldap/auth
+          version: v2
+      - secretKey: ldap_user_email
+        remoteRef:
+          key: /lldap/auth
+          version: v3
+      - secretKey: ldap_user_pass
+        remoteRef:
+          key: /lldap/auth
+          version: v4
+      - secretKey: key_seed
+        remoteRef:
+          key: /lldap/seed
+          version: v1
+    dataFrom: []
+
+  bootstrapUserSchemas:
+    data: []
+    dataFrom: []
+  bootstrapUser:
+    data:
+      - secretKey: password_alice
+        remoteRef:
+          key: /lldap/user/alice
+          version: v1
+      - secretKey: password_bob
+        remoteRef:
+          key: /lldap/user/bob
+          version: v1
+    dataFrom: []
+  bootstrapGroupSchemas:
+    data: []
+    dataFrom: []
+  bootstrapGroup:
+    data: []
+    dataFrom: []
+
+config:
+  jwt_secret: "{{`{{ .jwt_secret }}`}}"
+  ldap_user_dn: "{{`{{ .ldap_user_dn }}`}}"
+  ldap_user_email: "{{`{{ .ldap_user_email }}`}}"
+  ldap_user_pass: "{{`{{ .ldap_user_pass }}`}}"
+  key_seed: "{{`{{ .key_seed }}`}}"
+
+bootstrapJob:
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-delete-policy": hook-succeeded
+
+user_schemas:
+  - name: "uid"
+    attributeType: INTEGER
+    isEditable: false
+    isList: false
+    isVisible: true
+  - name: "mailbox"
+    attributeType: STRING
+    isEditable: false
+    isList: false
+    isVisible: true
+  - name: "mail-alias"
+    attributeType: STRING
+    isEditable: false
+    isList: true
+    isVisible: true
+
+group_schemas:
+  - name: "gid"
+    attributeType: INTEGER
+    isEditable: false
+    isList: false
+    isVisible: true
+
+groups:
+  - name: "admins"
+  - name: "developers"
+
+users:
+  - id: "alice"
+    email: "alice@example.com"
+    firstName: "Alice"
+    lastName: "Anderson"
+    password: "{{`{{ .password_alice }}`}}"
+    gravatar_avatar: "true"
+    mailbox: "specialmailbox"
+    groups:
+      - "admins"
+  - id: "bob"
+    email: "bob@example.com"
+    firstName: "Bob"
+    lastName: "Brown"
+    password: "{{`{{ .password_bob }}`}}"
+    groups:
+      - "developers"
