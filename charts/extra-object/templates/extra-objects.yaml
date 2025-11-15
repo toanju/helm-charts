@@ -1,4 +1,8 @@
 {{ range .Values.templates }}
 ---
-{{ tpl . $ }}
-{{ end }}
+{{ if typeIs "string" . }}
+  {{- tpl . $ }}
+{{- else }}
+  {{- tpl (toYaml .) $ }}
+{{- end }}
+{{- end }}
