@@ -173,7 +173,21 @@ externalSecrets:
   secretStoreRef:
     name: my-secret-store
     kind: SecretStore
-  data: []
+  config:
+    data: []
+    dataFrom: []
+  bootstrapUserSchemas:
+    data: []
+    dataFrom: []
+  bootstrapUser:
+    data: []
+    dataFrom: []
+  bootstrapGroupSchemas:
+    data: []
+    dataFrom: []
+  bootstrapGroup:
+    data: []
+    dataFrom: []
 
 bootstrapJob:
   annotations: {}
