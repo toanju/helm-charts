@@ -11,5 +11,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['{{ include "music-assistant.fullname" . }}:80']
+      args: ['{{ include "music-assistant.fullname" . }}:80/setup']
   restartPolicy: Never
