@@ -97,6 +97,16 @@ hostNetwork: false
 
 dnsPolicy: ClusterFirst
 
+hostAliases: []
+  # Details in https://kubernetes.io/docs/tasks/network/customize-hosts-file-for-pods/
+  # - ip: "192.168.1.100"
+  #   hostnames:
+  #     - "my-internal-service.local"
+  #     - "api.internal"
+  # - ip: "127.0.0.1"
+  #   hostnames:
+  #     - "localhost-alias"
+
 persistence:
   # persistence.enabled If true, use a Persistent Volume Claim. If false, use emptyDir.
   enabled: false
