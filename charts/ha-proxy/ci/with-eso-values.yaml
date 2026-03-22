@@ -1,0 +1,31 @@
+# CI test values — ESO path using the fake provider.
+# Injects a fake ESO SecretStore via extraObjects so that the ExternalSecret
+# rendered by the chart can resolve the token without a real secrets backend.
+extraObjects:
+  - |
+    apiVersion: external-secrets.io/v1
+    kind: SecretStore
+    metadata:
+      name: fake
+      labels: {{- include "ha-proxy.labels" . | nindent 4 }}
+    spec:
+      provider:
+        fake:
+          data:
+            - key: "/ha/token"
+              value: "ci-dummy-token"
+              version: "v1"
+
+externalSecrets:
+  enabled: true
+  secretStoreRef:
+    name: fake
+    kind: SecretStore
+  data:
+    - secretKey: token
+      remoteRef:
+        key: /ha/token
+        version: v1
+
+config:
+  haUrl: "http://localhost:8123"

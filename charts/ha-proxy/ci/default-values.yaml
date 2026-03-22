@@ -1,0 +1,14 @@
+# CI test values — manual secret path.
+# Injects a plain Kubernetes Secret via extraObjects so the Deployment can
+# mount the token without requiring a pre-existing secret in the cluster.
+extraObjects:
+  - |
+    apiVersion: v1
+    kind: Secret
+    metadata:
+      name: ha-long-lived-access-token
+    stringData:
+      token: "ci-dummy-token"
+
+config:
+  haUrl: "http://localhost:8123"
