@@ -47,7 +47,8 @@ jobs:
           # chart: external-secrets
           helm repo add external-secrets https://charts.external-secrets.io
           helm install external-secrets external-secrets/external-secrets \
-            -n external-secrets --create-namespace
+            -n external-secrets --create-namespace \
+            --wait --timeout 120s
 
       - name: Run chart-testing (install)
         run: ct install --config ct-install.yaml

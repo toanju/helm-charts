@@ -1,0 +1,19 @@
+apiVersion: v2
+name: ha-proxy
+description: >
+maintainers:
+  - name: toanju  # Tobias Jungel
+    email: toanju@users.noreply.github.com
+    url: https://github.com/toanju/
+home: https://github.com/toanju/helm-charts
+sources:
+  - https://github.com/toanju/ha-proxy
+type: application
+# renovate: datasource=docker depName=ghcr.io/toanju/ha-proxy
+version: 0.1.6
+# renovate: datasource=docker depName=ghcr.io/toanju/ha-proxy
+appVersion: "v0.1.6"
+keywords:
+  - home-assistant
+  - proxy
+  - iot

@@ -1,0 +1,126 @@
+# Number of pod replicas.
+replicaCount: 1
+
+image:
+  repository: ghcr.io/toanju/ha-proxy
+  # Overrides the image tag. Defaults to the chart's appVersion when empty.
+  tag: ""
+  pullPolicy: IfNotPresent
+
+# Reference to an existing Secret that holds the HA long-lived access token.
+# The Secret must exist in the same namespace before installing the chart.
+#
+# Example — create the Secret manually:
+#   kubectl create secret generic ha-proxy-token --from-literal=token=<your-token>
+#
+token:
+  # Name of the existing Secret.
+  secretName: "ha-long-lived-access-token"
+  # Key within the Secret whose value is the raw bearer token.
+  secretKey: "token"
+
+# ha-proxy application configuration.
+# These values are rendered into a config.toml mounted as a ConfigMap.
+config:
+  # Base URL of the Home Assistant instance. Required.
+  haUrl: "http://localhost:8123"
+
+  # Maximum incoming request body size in bytes. Requests exceeding this
+  # limit are rejected with HTTP 413 before any processing occurs.
+  maxBodyBytes: 65536
+
+  # Domain / service allow-list.
+  # Each entry must have a `domain` field and an optional `services` list.
+  # An empty `services` list means all services for that domain are allowed.
+  #
+  # Example:
+  #   allow:
+  #     - domain: light
+  #       services: [turn_on, turn_off, toggle]
+  #     - domain: switch
+  #       services: [turn_on, turn_off]
+  #     - domain: climate
+  #       services: []
+  allow: []
+
+service:
+  type: ClusterIP
+  port: 8080
+
+serviceAccount:
+  # Create a dedicated ServiceAccount for the pod.
+  create: true
+  # Annotations to add to the ServiceAccount.
+  annotations: {}
+  # Override the auto-generated name. Defaults to the fullname of the release.
+  name: ""
+
+# Annotations added to every pod.
+podAnnotations: {}
+
+# Pod-level security context.
+podSecurityContext: {}
+
+# Container-level security context.
+# Defaults enforce a read-only root filesystem and non-root execution.
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  capabilities:
+    drop:
+      - ALL
+
+# Resource requests and limits for the ha-proxy container.
+resources: {}
+# Example:
+#   requests:
+#     cpu: 50m
+#     memory: 32Mi
+#   limits:
+#     cpu: 200m
+#     memory: 64Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# Extra Kubernetes objects to render alongside the chart resources.
+# Useful for injecting supporting resources (e.g. SecretStore, ExternalSecret,
+# plain Secret) without requiring a separate chart or pre-install step.
+# Items may be raw YAML strings (Helm template expressions are evaluated) or
+# YAML objects.
+extraObjects: []
+
+# External Secrets Operator (ESO) support.
+# When enabled, an ExternalSecret resource is created that tells ESO to
+# fetch the HA long-lived access token from an external secrets backend and
+# create/maintain the Kubernetes Secret referenced by token.secretName.
+#
+# The token.secretName value is used as the target Secret name, so it must
+# match the name ESO will give the generated Secret.
+#
+# Example — point at a Vault SecretStore:
+#   externalSecrets:
+#     enabled: true
+#     secretStoreRef:
+#       name: vault-backend
+#       kind: SecretStore
+#     data:
+#       - secretKey: token
+#         remoteRef:
+#           key: ha/token
+#
+externalSecrets:
+  enabled: false
+  refreshPolicy: "Periodic"
+  refreshInterval: "1h"
+  secretStoreRef:
+    name: my-secret-store
+    kind: SecretStore
+  # List of remoteRef mappings — same structure as ESO ExternalSecret .spec.data
+  data: []
+  # dataFrom alternative — same structure as ESO ExternalSecret .spec.dataFrom
+  dataFrom: []
