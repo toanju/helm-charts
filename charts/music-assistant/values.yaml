@@ -97,6 +97,8 @@ hostNetwork: false
 
 dnsPolicy: ClusterFirst
 
+dnsConfig: {}
+
 hostAliases: []
   # Details in https://kubernetes.io/docs/tasks/network/customize-hosts-file-for-pods/
   # - ip: "192.168.1.100"
@@ -172,4 +174,6 @@ initContainers: []
   #   command: ['sh', '-c', 'echo Hello from init container']
 
 ma:
+  args: []
+  command: []
   env: []
