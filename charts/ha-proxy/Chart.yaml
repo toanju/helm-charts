@@ -12,7 +12,7 @@ type: application
 # renovate: datasource=docker depName=ghcr.io/toanju/ha-proxy
 version: 0.1.6
 # renovate: datasource=docker depName=ghcr.io/toanju/ha-proxy
-appVersion: "v0.1.8"
+appVersion: "v0.2.0"
 keywords:
   - home-assistant
   - proxy
