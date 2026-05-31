@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "unbound.fullname" . }}-test-connection"
+  labels:
+    {{- include "unbound.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: nslookup
+      image: busybox
+      command: ['nslookup']
+      args: ['localhost', '{{ include "unbound.fullname" . }}']
+  restartPolicy: Never
