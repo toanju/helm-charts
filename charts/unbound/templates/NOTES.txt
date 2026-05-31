@@ -1,0 +1,8 @@
+Unbound DNS resolver has been deployed.
+
+To test DNS resolution from within the cluster:
+
+  kubectl run dns-test --rm -it --restart=Never --image=busybox -- nslookup localhost {{ include "unbound.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local
+
+The DNS service is available at:
+  {{ include "unbound.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.service.port }}
