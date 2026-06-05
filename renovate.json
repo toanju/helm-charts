@@ -24,8 +24,7 @@
         "/^charts\\/etcd\\/Chart\\.yaml$/"
       ],
       "matchStrings": [
-        "appVersion: \"(?<currentValue>.*?)\"\\s+",
-        "version: (?<currentValue>.*?)\\s+"
+        "appVersion: \"(?<currentValue>.*?)\"\\s+"
       ],
       "depNameTemplate": "quay.io/coreos/etcd",
       "datasourceTemplate": "docker"
@@ -37,8 +36,7 @@
         "/^charts\\/home-assistant\\/Chart\\.yaml$/"
       ],
       "matchStrings": [
-        "appVersion: \"(?<currentValue>.*?)\"\\s+",
-        "version: (?<currentValue>.*?)\\s+"
+        "appVersion: \"(?<currentValue>.*?)\"\\s+"
       ],
       "depNameTemplate": "ghcr.io/home-assistant/home-assistant",
       "datasourceTemplate": "docker"
@@ -50,8 +48,7 @@
         "/^charts\\/music-assistant\\/Chart\\.yaml$/"
       ],
       "matchStrings": [
-        "appVersion: \"(?<currentValue>.*?)\"\\s+",
-        "version: (?<currentValue>.*?)\\s+"
+        "appVersion: \"(?<currentValue>.*?)\"\\s+"
       ],
       "depNameTemplate": "ghcr.io/music-assistant/server",
       "datasourceTemplate": "docker"
@@ -63,8 +60,7 @@
         "/^charts\\/mosquitto\\/Chart\\.yaml$/"
       ],
       "matchStrings": [
-        "appVersion: \"(?<currentValue>.*?)\"\\s+",
-        "version: (?<currentValue>.*?)\\s+"
+        "appVersion: \"(?<currentValue>.*?)\"\\s+"
       ],
       "depNameTemplate": "eclipse-mosquitto",
       "datasourceTemplate": "docker"
@@ -76,8 +72,7 @@
         "/^charts\\/zigbee2mqtt\\/Chart\\.yaml$/"
       ],
       "matchStrings": [
-        "appVersion: \"(?<currentValue>.*?)\"\\s+",
-        "version: (?<currentValue>.*?)\\s+"
+        "appVersion: \"(?<currentValue>.*?)\"\\s+"
       ],
       "depNameTemplate": "ghcr.io/koenkk/zigbee2mqtt",
       "datasourceTemplate": "docker"
@@ -88,7 +83,7 @@
         "/(^|/)Chart\\.yaml$/"
       ],
       "matchStrings": [
-        "# renovate: datasource=(?<datasource>[a-z-.]+?) depName=(?<depName>[^\\s]+?)(?: (lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?(?: registryUrl=(?<registryUrl>[^\\s]+?))?\\s(?:appVersion|version): \\\"?(?<currentValue>.+?)\\\"?\\s"
+        "# renovate: datasource=(?<datasource>[a-z-.]+?) depName=(?<depName>[^\\s]+?)(?: (lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?(?: registryUrl=(?<registryUrl>[^\\s]+?))?\\sappVersion: \\\"?(?<currentValue>.+?)\\\"?\\s"
       ]
     }
   ]
