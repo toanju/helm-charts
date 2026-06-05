@@ -1,0 +1,78 @@
+name: Auto-bump chart version
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - 'charts/**'
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.BUMP_APP_ID }}
+          private-key: ${{ secrets.BUMP_APP_PRIVATE_KEY }}
+
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Detect changed charts and bump versions
+        run: |
+          git fetch origin main
+          changed_charts=$(git diff --name-only origin/main...HEAD -- charts/ | cut -d/ -f2 | sort -u)
+
+          bumped=false
+          for chart in $changed_charts; do
+            chart_yaml="charts/${chart}/Chart.yaml"
+            if [ ! -f "$chart_yaml" ]; then continue; fi
+
+            # Skip if version was already bumped in this PR
+            version_diff=$(git diff origin/main...HEAD -- "$chart_yaml" | grep "^+version:" || true)
+            if [ -n "$version_diff" ]; then
+              echo "::notice::$chart: version already bumped, skipping"
+              continue
+            fi
+
+            # Read values with yq (pre-installed on GitHub runners)
+            current_version=$(yq '.version' "$chart_yaml")
+            current_app_version=$(yq '.appVersion' "$chart_yaml")
+
+            # Normalize appVersion: strip v prefix, strip leading zeros
+            norm_app=$(echo "$current_app_version" | sed 's/^v//' | awk -F. '{for(i=1;i<=NF;i++) $i=$i+0; print $1"."$2"."$3}')
+            norm_app_major=$(echo "$norm_app" | cut -d. -f1)
+            norm_app_minor=$(echo "$norm_app" | cut -d. -f2)
+
+            # Parse current version (strip pre-release suffix)
+            ver_base=$(echo "$current_version" | sed 's/-.*//')
+            ver_major=$(echo "$ver_base" | cut -d. -f1)
+            ver_minor=$(echo "$ver_base" | cut -d. -f2)
+            ver_patch=$(echo "$ver_base" | cut -d. -f3)
+
+            # Determine new version
+            if [ -n "$norm_app_major" ] && [ -n "$norm_app_minor" ] && \
+               { [ "$norm_app_major" != "$ver_major" ] || [ "$norm_app_minor" != "$ver_minor" ]; }; then
+              new_version="${norm_app_major}.${norm_app_minor}.0"
+            else
+              new_version="${ver_major}.${ver_minor}.$((ver_patch + 1))"
+            fi
+
+            yq -i ".version = \"${new_version}\"" "$chart_yaml"
+            echo "::notice::$chart: ${current_version} -> ${new_version}"
+            bumped=true
+          done
+
+          if [ "$bumped" = true ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add charts/*/Chart.yaml
+            git commit -m "chore: auto-bump chart versions"
+            git push
+          fi
