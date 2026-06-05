@@ -1,6 +1,6 @@
 chart-dirs:
   - charts
-check-version-increment: False
+check-version-increment: true
 #helm-extra-args: --timeout 600s
 remote: origin
 target-branch: main
