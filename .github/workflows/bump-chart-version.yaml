@@ -41,9 +41,9 @@ jobs:
               continue
             fi
 
-            # Read values with yq (pre-installed on GitHub runners)
-            current_version=$(yq '.version' "$chart_yaml")
-            current_app_version=$(yq '.appVersion' "$chart_yaml")
+            # Read values with grep/awk (preserves file formatting unlike yq)
+            current_version=$(grep '^version:' "$chart_yaml" | awk '{print $2}')
+            current_app_version=$(grep '^appVersion:' "$chart_yaml" | awk '{print $2}' | tr -d '"')
 
             # Normalize appVersion: strip v prefix, strip leading zeros
             norm_app=$(echo "$current_app_version" | sed 's/^v//' | awk -F. '{for(i=1;i<=NF;i++) $i=$i+0; print $1"."$2"."$3}')
@@ -64,7 +64,7 @@ jobs:
               new_version="${ver_major}.${ver_minor}.$((ver_patch + 1))"
             fi
 
-            yq -i ".version = \"${new_version}\"" "$chart_yaml"
+            sed -i "s/^version: .*/version: ${new_version}/" "$chart_yaml"
             echo "::notice::$chart: ${current_version} -> ${new_version}"
             bumped=true
           done
