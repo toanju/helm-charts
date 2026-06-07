@@ -175,7 +175,23 @@ unbound:
         access-control: 0.0.0.0/0 allow
         verbosity: 1
 
-    remote-control:
-        control-enable: yes
-        control-interface: 127.0.0.1
-        control-use-cert: no
+# Remote control configuration for unbound-control access.
+# The localhost interface (127.0.0.1) is always included for health probes.
+# NOTE: If you define a "remote-control:" block inside unbound.config, this
+# entire section is ignored and your raw config block takes full precedence.
+# The control Service is still created if remoteControl.enabled is true.
+remoteControl:
+  # Set to true to expose unbound-control to other pods (e.g. external-dns)
+  enabled: false
+  # Network interface unbound listens on for remote control (in addition to 127.0.0.1)
+  controlInterface: 0.0.0.0
+  # TCP port for the control interface
+  controlPort: 8953
+  # Whether to require TLS certificate authentication (control-use-cert)
+  controlUseCert: false
+  # Dedicated Kubernetes Service for the control interface
+  service:
+    enabled: true
+    type: ClusterIP
+    port: 8953
+    annotations: {}

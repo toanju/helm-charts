@@ -1,0 +1,21 @@
+{{- if and .Values.remoteControl.enabled .Values.remoteControl.service.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "unbound.fullname" . }}-control
+  labels:
+    {{- include "unbound.labels" . | nindent 4 }}
+  {{- with .Values.remoteControl.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ .Values.remoteControl.service.type }}
+  ports:
+    - port: {{ .Values.remoteControl.service.port }}
+      targetPort: control
+      protocol: TCP
+      name: control
+  selector:
+    {{- include "unbound.selectorLabels" . | nindent 4 }}
+{{- end }}

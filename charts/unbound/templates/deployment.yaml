@@ -48,6 +48,11 @@ spec:
             - name: dns-udp
               containerPort: {{ .Values.service.port }}
               protocol: UDP
+            {{- if .Values.remoteControl.enabled }}
+            - name: control
+              containerPort: {{ .Values.remoteControl.controlPort }}
+              protocol: TCP
+            {{- end }}
           {{- with .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}

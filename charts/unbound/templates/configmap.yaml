@@ -7,3 +7,15 @@ metadata:
 data:
   unbound.conf: |
     {{- .Values.unbound.config | nindent 4 }}
+    {{- if not (regexMatch "(?m)^\\s*remote-control:" .Values.unbound.config) }}
+
+    remote-control:
+        control-enable: yes
+    {{- if .Values.remoteControl.enabled }}
+        control-interface: {{ .Values.remoteControl.controlInterface }}
+        control-port: {{ .Values.remoteControl.controlPort }}
+    {{- else }}
+        control-interface: 127.0.0.1
+    {{- end }}
+        control-use-cert: {{ if .Values.remoteControl.controlUseCert }}yes{{ else }}no{{ end }}
+    {{- end }}
