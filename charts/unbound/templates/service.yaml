@@ -4,8 +4,13 @@ metadata:
   name: {{ include "unbound.fullname" . }}
   labels:
     {{- include "unbound.labels" . | nindent 4 }}
+  {{- if .Values.service.annotations }}
+  annotations:
+    {{- toYaml .Values.service.annotations | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ .Values.service.type }}
+  ipFamilyPolicy: {{ .Values.service.ipFamilyPolicy }}
   ports:
     - port: {{ .Values.service.port }}
       targetPort: dns-tcp
