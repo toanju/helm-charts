@@ -41,8 +41,7 @@ service:
     # see https://kubernetes.io/docs/concepts/services-networking/dual-stack/
     ipFamilyPolicy: "SingleStack"
     # see https://kubernetes.io/docs/concepts/services-networking/dual-stack/
-    ipFamilies:
-    - IPv4
+    ipFamilies: []
     ports:
       http: 80
   dns:
@@ -51,8 +50,7 @@ service:
     # see https://kubernetes.io/docs/concepts/services-networking/dual-stack/
     ipFamilyPolicy: "SingleStack"
     # see https://kubernetes.io/docs/concepts/services-networking/dual-stack/
-    ipFamilies:
-    - IPv4
+    ipFamilies: []
     ports:
       dnstcp: 53
       dnsudp: 53
