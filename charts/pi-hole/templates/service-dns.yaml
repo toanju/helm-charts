@@ -10,11 +10,14 @@ metadata:
   {{- end }}
 spec:
   type: {{ .Values.service.dns.type }}
-{{- if .Values.service.dns.ipFamilyPolicy }}
-  ipFamilyPolicy: {{ .Values.service.dns.ipFamilyPolicy }}
+{{- with .Values.service.dns.ipFamilyPolicy }}
+  ipFamilyPolicy: {{ . }}
 {{- end }}
-{{- if .Values.service.dns.ipFamilies }}
-  ipFamilies: {{ toYaml .Values.service.dns.ipFamilies | nindent 4 }}
+{{- with .Values.service.dns.ipFamilies }}
+  ipFamilies: {{ toYaml . | nindent 4 }}
+{{- end }}
+{{- with .Values.service.dns.externalTrafficPolicy }}
+  externalTrafficPolicy: {{ . }}
 {{- end }}
   ports:
     - port: {{ .Values.service.dns.ports.dnstcp }}
