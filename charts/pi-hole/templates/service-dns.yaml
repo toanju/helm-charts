@@ -1,3 +1,8 @@
+{{- $extTrafficPolicy := "" }}
+{{- $svcs := list "LoadBalancer" "NodePort" }}
+{{- if has .Values.service.dns.type $svcs }}
+{{- $extTrafficPolicy = "Local" }}
+{{- end }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -16,9 +21,7 @@ spec:
 {{- with .Values.service.dns.ipFamilies }}
   ipFamilies: {{ toYaml . | nindent 4 }}
 {{- end }}
-{{- with .Values.service.dns.externalTrafficPolicy }}
-  externalTrafficPolicy: {{ . }}
-{{- end }}
+  externalTrafficPolicy: {{ $extTrafficPolicy }}
   ports:
     - port: {{ .Values.service.dns.ports.dnstcp }}
       targetPort: dnstcp

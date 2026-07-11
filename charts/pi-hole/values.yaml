@@ -51,7 +51,6 @@ service:
     ipFamilyPolicy: "SingleStack"
     # see https://kubernetes.io/docs/concepts/services-networking/dual-stack/
     ipFamilies: []
-    externalTrafficPolicy: Cluster
     ports:
       dnstcp: 53
       dnsudp: 53
