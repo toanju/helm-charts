@@ -4,6 +4,6 @@ check-version-increment: true
 excluded-charts:
   - wireguard
   - zigbee2mqtt
-helm-extra-args: --timeout 600s
+helm-extra-args: --timeout 100s
 remote: origin
 target-branch: main

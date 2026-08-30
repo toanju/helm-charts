@@ -1,0 +1,10 @@
+ha:
+  configFiles:
+    configuration.yaml: |
+      default_config: {}
+      homeassistant:
+        customize: !include customize.yaml
+    customize.yaml: |
+      light.living_room_lamp:
+        friendly_name: "Couch Lamp"
+        icon: mdi:lamp

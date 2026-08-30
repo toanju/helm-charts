@@ -10,6 +10,10 @@ spec:
   containers:
     - name: wget
       image: busybox
-      command: ['wget']
-      args: ['{{ include "home-assistant.fullname" . }}:80']
+      command:
+      - sh
+      args:
+      - "-c"
+      - |
+        wget '{{ include "home-assistant.fullname" . }}:80' && cat index.html
   restartPolicy: Never
