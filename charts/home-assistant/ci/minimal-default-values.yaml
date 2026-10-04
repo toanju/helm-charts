@@ -1,0 +1,4 @@
+ha:
+  includeDefaultConfig: false
+  config: |
+    sun:

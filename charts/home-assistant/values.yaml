@@ -168,7 +168,18 @@ initContainers: []
 
 ha:
   env: []
-  configFiles:
-    configuration.yaml: |
-      # https://www.home-assistant.io/integrations/default_config/
-      default_config: {}
+  # Add a default_config component to the configuration.yaml
+  includeDefaultConfig: true
+  # add additional config to the configuration.yaml
+  config: ""
+
+  # List of config files to be created in the config directory. If a key is
+  # provided the config file will be referenced in the configuration.yaml
+  # using the key (top level only).
+  # e.g.:
+  # - key: keyInConfigYaml
+  #   filename: referenced_filename_with_content.yaml
+  #   template: false
+  #   content: |
+  #     yaml: content
+  extraConfigFiles: []
