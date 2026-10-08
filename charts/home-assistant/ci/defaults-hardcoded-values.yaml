@@ -1,0 +1,4 @@
+ha:
+  includeDefaultConfig: false
+  config: |
+    default_config:

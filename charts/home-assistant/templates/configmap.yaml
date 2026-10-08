@@ -5,7 +5,21 @@ metadata:
   labels:
     {{- include "home-assistant.labels" . | nindent 4 }}
 data:
-  {{- range $key, $value := .Values.ha.configFiles }}
-  {{ $key }}: |
-    {{- $value | nindent 4 }}
+  configuration.yaml: |
+    {{- if .Values.ha.includeDefaultConfig }}
+    default_config:
+    {{- end }}
+    {{- range .Values.ha.extraConfigFiles }}
+    {{ .key }}: !include {{ .filename }}
+    {{- end }}
+    {{- if .Values.ha.config }}
+    {{- .Values.ha.config | nindent 4 }}
+    {{- end }}
+  {{- range .Values.ha.extraConfigFiles }}
+  {{ .filename }}: |
+    {{- if .template }}
+    {{- tpl .content $ | nindent 4 }}
+    {{- else }}
+    {{- .content | nindent 4 }}
+    {{- end }}
   {{- end }}

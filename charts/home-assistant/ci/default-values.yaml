@@ -1,4 +1,0 @@
-ha:
-  configFiles:
-    configuration.yaml: |
-      default_config: {}
