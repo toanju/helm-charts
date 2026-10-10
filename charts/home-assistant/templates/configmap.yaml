@@ -10,13 +10,21 @@ data:
     default_config:
     {{- end }}
     {{- range .Values.ha.extraConfigFiles }}
+    {{- if .key }}
     {{ .key }}: !include {{ .filename }}
+    {{- end }}
     {{- end }}
     {{- if .Values.ha.config }}
     {{- .Values.ha.config | nindent 4 }}
     {{- end }}
   {{- range .Values.ha.extraConfigFiles }}
-  {{ .filename }}: |
+  {{- $fname := "" }}
+  {{- if .key }}
+  {{- $fname = printf "%s.yaml" .key }}
+  {{- else }}
+  {{- $fname = .filename }}
+  {{- end }}
+  {{ $fname }}: |
     {{- if .template }}
     {{- tpl .content $ | nindent 4 }}
     {{- else }}
