@@ -6,19 +6,24 @@ metadata:
     {{- include "home-assistant.labels" . | nindent 4 }}
 data:
   configuration.yaml: |
+    {{- $fname := "" }}
     {{- if .Values.ha.includeDefaultConfig }}
     default_config:
     {{- end }}
     {{- range .Values.ha.extraConfigFiles }}
     {{- if .key }}
-    {{ .key }}: !include {{ .filename }}
+    {{- $fname = printf "%s.yaml" .key }}
+    {{- else }}
+    {{- $fname = .filename }}
+    {{- end }}
+    {{- if .key }}
+    {{ .key }}: !include {{ $fname }}
     {{- end }}
     {{- end }}
     {{- if .Values.ha.config }}
     {{- .Values.ha.config | nindent 4 }}
     {{- end }}
   {{- range .Values.ha.extraConfigFiles }}
-  {{- $fname := "" }}
   {{- if .key }}
   {{- $fname = printf "%s.yaml" .key }}
   {{- else }}
