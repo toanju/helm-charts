@@ -1,9 +1,10 @@
 ha:
   config: |
-    test: content
+    homeassistant:
+      customize: !include customize.yaml
+      debug: true
   extraConfigFiles:
-    - key: customize
-      filename: customize.yaml
+    - filename: customize.yaml
       content: |
         light.living_room_lamp:
           friendly_name: "Couch Lamp"
