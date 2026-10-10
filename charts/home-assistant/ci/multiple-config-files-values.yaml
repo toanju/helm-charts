@@ -9,3 +9,14 @@ ha:
         light.living_room_lamp:
           friendly_name: "Couch Lamp"
           icon: mdi:lamp
+    - key: light
+      content: |
+        - platform: group
+          name: Alle Farb Lichter
+          entities:
+            # K1
+            - light.milli
+            # K2
+            - light.sophie
+            # Schlafzimmer
+            - light.schlafzimmer
