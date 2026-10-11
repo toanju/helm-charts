@@ -166,10 +166,32 @@ initContainers: []
   #   image: busybox
   #   command: ['sh', '-c', 'echo Hello from init container']
 
+externalSecrets:
+  # External Secrets configuration (see https://external-secrets.io/)
+  refreshPolicy: "Owner"
+  refreshInterval: "1h"
+  secretStoreRef:
+    name: "my-secret-store"
+    kind: "SecretStore"
+  recorder:
+    data: {}
+    dataFrom: {}
+
 ha:
   env: []
   # Add a default_config component to the configuration.yaml
   includeDefaultConfig: true
+  # recorder configuration (see https://www.home-assistant.io/integrations/recorder/)
+  recorder:
+    # enable or disable the recorder component
+    enabled: true
+    externalSecret: false
+    # database URL for the recorder component (see https://www.home-assistant.io/integrations/recorder/#custom-database-engines)
+    # e.g. postgresql://user:password@SERVER_IP/DB_NAME : 'postgres://{{`{{ .username }}:{{ .password }}`}}@{{ include "home-assistant.fullname" . }}-cnpg-cluster-rw:5432/{{`{{ .database }}`}}'
+    dbUrl: "sqlite:////config/home-assistant_v2.db"
+    # additional recorder config merged with dbUrl
+    config: {}
+
   # add additional config to the configuration.yaml
   config: ""
 

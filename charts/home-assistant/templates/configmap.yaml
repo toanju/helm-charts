@@ -23,6 +23,9 @@ data:
     {{- if .Values.ha.config }}
     {{- .Values.ha.config | nindent 4 }}
     {{- end }}
+    {{- if .Values.ha.recorder.enabled }}
+    recorder: !include recorder.yaml
+    {{- end }}
   {{- range .Values.ha.extraConfigFiles }}
   {{- if .key }}
   {{- $fname = printf "%s.yaml" .key }}
@@ -34,5 +37,14 @@ data:
     {{- tpl .content $ | nindent 4 }}
     {{- else }}
     {{- .content | nindent 4 }}
+    {{- end }}
+  {{- end }}
+  {{- if and .Values.ha.recorder.enabled (not .Values.ha.recorder.externalSecret) }}
+  recorder.yaml: |
+    {{- if .Values.ha.recorder.dbUrl }}
+    db_url: {{ tpl .Values.ha.recorder.dbUrl . | quote }}
+    {{- end }}
+    {{- if .Values.ha.recorder.config }}
+    {{- toYaml .Values.ha.recorder.config | nindent 4 }}
     {{- end }}
   {{- end }}

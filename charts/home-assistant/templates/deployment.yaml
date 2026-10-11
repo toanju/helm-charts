@@ -130,8 +130,14 @@ spec:
       {{- end }}
       volumes:
         - name: config-volume
-          configMap:
-            name: {{ include "home-assistant.fullname" . }}
+          projected:
+            sources:
+            - configMap:
+                name: {{ include "home-assistant.fullname" . }}
+            {{- if and .Values.ha.recorder.enabled .Values.ha.recorder.externalSecret }}
+            - secret:
+                name: {{ include "home-assistant.fullname" . }}-recorder
+            {{- end }}
         - name: data-volume
           {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:
