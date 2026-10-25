@@ -51,6 +51,10 @@ spec:
               for f in /config/*.yaml; do
                 if [ -f "$f" ]; then
                   echo "$f"
+                  if [[ "$f" == *"recorder.yaml" ]]; then
+                    echo "Skipping recorder.yaml"
+                    continue
+                  fi
                   cat "$f"
                 fi
               done

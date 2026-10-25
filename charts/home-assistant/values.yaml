@@ -168,7 +168,7 @@ initContainers: []
 
 externalSecrets:
   # External Secrets configuration (see https://external-secrets.io/)
-  refreshPolicy: "Owner"
+  refreshPolicy: "Periodic"
   refreshInterval: "1h"
   secretStoreRef:
     name: "my-secret-store"
@@ -187,7 +187,7 @@ ha:
     enabled: true
     externalSecret: false
     # database URL for the recorder component (see https://www.home-assistant.io/integrations/recorder/#custom-database-engines)
-    # e.g. postgresql://user:password@SERVER_IP/DB_NAME : 'postgres://{{`{{ .username }}:{{ .password }}`}}@{{ include "home-assistant.fullname" . }}-cnpg-cluster-rw:5432/{{`{{ .database }}`}}'
+    # e.g. postgresql://user:password@SERVER_IP/DB_NAME : 'postgresql://{{`{{ .username }}:{{ .password }}`}}@home-assistant-cnpg-cluster-rw:5432/{{`{{ .database }}`}}'
     dbUrl: "sqlite:////config/home-assistant_v2.db"
     # additional recorder config merged with dbUrl
     config: {}
