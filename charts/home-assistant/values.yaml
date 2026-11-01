@@ -142,10 +142,6 @@ persistence:
   # Persistent Volume Name
   volumeName: ""
 
-# default deployment strategy Recreate for default use with sqlite DB
-strategy:
-  type: Recreate
-
 extraObjects: []
   # List of extra objects to be deployed with the chart.
   # Useful for creating ConfigMaps, Secrets, etc.
