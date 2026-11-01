@@ -9,10 +9,8 @@ spec:
   selector:
     matchLabels:
       {{- include "home-assistant.selectorLabels" . | nindent 6 }}
-  {{- with .Values.strategy }}
   strategy:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
+    type: Recreate
   template:
     metadata:
       {{- with .Values.podAnnotations }}
